@@ -9,6 +9,8 @@ export { AMGCinematicCameraPro, AMG_LENS_PRESETS } from './amg-cinematic-camera-
 export { AMGMorphBridge } from './amg-morph-bridge.js';
 export { AMGArabicTypographyPro, AMG_ARABIC_SCALES } from './amg-arabic-typography-pro.js';
 export { AMGShotcraftEngine, AMG_SHOTCRAFT_REGISTRY } from './amg-shotcraft-engine.js';
+export { AMGEditorialDiagramEngine } from './amg-editorial-diagram-engine.js';
+export { AMGIsometricAnatomyPro } from './amg-isometric-anatomy-pro.js';
 export * from './amg-svg-utils.js';
 export * from './amg-d3-bridge.js';
 export * from './amg-text-engine.js';

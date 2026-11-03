@@ -12,6 +12,7 @@
     "vision-audit": "node scripts/amg-vision-audit.mjs",
     "verify-dom": "node scripts/amg-verify-dom.mjs",
     "verify-shotcraft": "node scripts/amg-shotcraft-verify.mjs",
+    "verify-diagrams": "node scripts/amg-diagram-verify.mjs",
     "bundle": "node scripts/amg-bundle-master.mjs",
     "satori": "node scripts/amg-satori-compile.mjs"
   },
