@@ -59,6 +59,14 @@ if (stageNum === 1) {
             errors.push(`المشهد ${script.scenes[i].sceneId}: زاوية دوران الكاميرا مفرطة (${Math.max(rotZ, pitch)} درجة). الحد الأقصى المسموح لمنع تشوه النصوص هو 65 درجة.`);
           }
         }
+        // فحص جسور التحول الهندسي المتصل (Morph Bridge Contract)
+        if (i < script.scenes.length - 1) {
+          const bridge = script.scenes[i].morphBridgeToNext;
+          if (!bridge || !bridge.type || !bridge.sourceElementId || !bridge.targetElementId) {
+            passed = false;
+            errors.push(`المشهد ${script.scenes[i].sceneId}: يفتقر إلى عقد جسر تحول سليم (morphBridgeToNext). يجب تحديد نوع الجسر وعناصر الربط لمنع القطع الجاف.`);
+          }
+        }
       }
     } catch (e) {
       passed = false;

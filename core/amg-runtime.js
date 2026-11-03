@@ -6,6 +6,7 @@ export * from './vendor/anime.esm.js';
 export { AMGClock } from './amg-clock.js';
 export { AMGCameraRig } from './amg-camera.js';
 export { AMGCinematicCameraPro, AMG_LENS_PRESETS } from './amg-cinematic-camera-pro.js';
+export { AMGMorphBridge } from './amg-morph-bridge.js';
 export * from './amg-svg-utils.js';
 export * from './amg-d3-bridge.js';
 export * from './amg-text-engine.js';
