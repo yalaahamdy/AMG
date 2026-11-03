@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene 02 Motion (Stage 6)</title>
+  <link rel="stylesheet" href="../../../core/amg-tokens.css">
+  <link rel="stylesheet" href="../../../core/amg-stage.css">
+  <style>
+    @scope (#s02-root) {
+      .scene-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 1400px;
+        height: 600px;
+      }
+      .text-col {
+        width: 520px;
+        opacity: 0;
+      }
+      .visual-col {
+        width: 720px;
+        height: 480px;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        opacity: 0;
+      }
+      .metric-badge {
+        font-family: var(--amg-font-mono);
+        font-size: 54px;
+        font-weight: 800;
+        color: #10b981;
+      }
+      .chart-svg {
+        width: 100%;
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body class="amg-body">
+  <div id="amg-stage" class="amg-stage amg-crisp-stroke" data-aspect="16:9">
+    <div id="amg-camera-rig" class="amg-camera-rig">
+      <section id="s02-root" class="amg-scene">
+        <div class="scene-layout">
+          <div class="text-col" id="s02-text-col">
+            <h2 id="s02-title" style="font-family:var(--amg-font-arabic); font-size:62px; color:#fff; line-height:1.2; margin:0 0 20px 0;">أداء حتمي وذكاء لا نهائي</h2>
+            <p style="font-family:var(--amg-font-arabic); font-size:22px; color:#94a3b8; line-height:1.6; margin:0;">تحكم إطاري مطلق بالمللي ثانية عبر بروتوكول الساعة المركزية window.seek(t).</p>
+          </div>
+          <div class="visual-col" id="s02-visual-col" data-amg-ambient="float">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:18px; color:#cbd5e1; font-weight:600;">مؤشر تسارع العمليات</span>
+              <span class="metric-badge" id="s02-metric-stat">0.00%</span>
+            </div>
+            <!-- D3 Chart Curve -->
+            <svg class="chart-svg" viewBox="0 0 650 240" fill="none">
+              <path id="s02-chart-curve" d="M 20 200 C 180 180, 260 120, 380 90 S 520 40, 630 20" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" pathLength="100"/>
+              <circle id="s02-chart-dot" cx="630" cy="20" r="8" fill="#38bdf8" opacity="0"/>
+            </svg>
+            <div style="font-size:14px; color:#64748b;">* تم التحقق رياضياً عبر D3.js وحسابات المنحنيات الدقيقة</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initAMGStage, drawSVG, prepareKineticText, animateKineticReveal, registerAmbientAliveLoop } from '../../../core/amg-runtime.js';
+
+    const { clock, camera, hud, timeline } = initAMGStage({ durationMs: 4500, fps: 60 });
+    registerAmbientAliveLoop(clock, '#amg-stage');
+
+    // SC-032 Whip Pan & Reveal Camera Move
+    camera.keyframe(timeline, { x: 0, scale: 1.0, duration: 800, ease: 'outExpo', start: 0 });
+
+    // 1. دخول النصوص
+    timeline.add('#s02-text-col', {
+      opacity: [0, 1],
+      translateX: [30, 0],
+      duration: 600,
+      ease: 'outExpo'
+    }, 150);
+
+    // 2. صعود بطاقة الواجهة
+    timeline.add('#s02-visual-col', {
+      opacity: [0, 1],
+      scale: [0.94, 1.0],
+      duration: 700,
+      ease: 'outBack'
+    }, 200);
+
+    // 3. رسم منحنى D3 البياني
+    drawSVG(timeline, '#s02-chart-curve', { start: 400, duration: 1100, ease: 'inOutCubic' });
+    timeline.add('#s02-chart-dot', { opacity: [0, 1], scale: [0, 1], duration: 400, ease: 'outBack' }, 1400);
+
+    // 4. عداد الإحصائية المتسارع
+    const statEl = document.querySelector('#s02-metric-stat');
+    const proxy = { val: 0 };
+    timeline.add(proxy, {
+      val: 99.98,
+      duration: 1400,
+      ease: 'outExpo',
+      onUpdate: () => {
+        statEl.textContent = `${proxy.val.toFixed(2)}%`;
+      }
+    }, 400);
+  </script>
+</body>
+</html>

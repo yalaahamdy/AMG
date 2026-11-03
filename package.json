@@ -1,0 +1,30 @@
+{
+  "name": "amg",
+  "version": "1.0.0",
+  "description": "The Ultimate Pure-HTML Motion Graphics AI Ecosystem",
+  "type": "module",
+  "scripts": {
+    "init-project": "node scripts/amg-init.mjs",
+    "query": "node scripts/amg-query.mjs",
+    "stage-gate": "node scripts/amg-stage-gate.mjs",
+    "verify-dom": "node scripts/amg-verify-dom.mjs",
+    "bundle": "node scripts/amg-bundle-master.mjs",
+    "satori": "node scripts/amg-satori-compile.mjs"
+  },
+  "keywords": [
+    "motion-graphics",
+    "html5",
+    "svg",
+    "animejs",
+    "d3",
+    "animation",
+    "ai-agent",
+    "planning-with-files"
+  ],
+  "author": "AMG Ecosystem",
+  "license": "MIT",
+  "dependencies": {
+    "animejs": "^4.5.0",
+    "d3": "^7.9.1"
+  }
+}

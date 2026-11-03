@@ -1,0 +1,6 @@
+# Windsurf Rules for AMG
+- Enforce the 7 isolated stages from AMG_MASTER_ROUTER.md.
+- Use planning files in workspace/ (task_plan.md, findings.md, progress.md).
+- Keep all scene outputs as zero-build native HTML files.
+- Use Anime.js v4 functions (`createTimeline`, `svg.createDrawable`, `svg.morphTo`) and D3 utilities.
+- Do not repeat animation entries consecutively; ensure choreography diversity.

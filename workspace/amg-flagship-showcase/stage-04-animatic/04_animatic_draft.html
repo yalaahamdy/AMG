@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMG Flagship Showcase: Animatic Draft (Stage 4)</title>
+  <link rel="stylesheet" href="../../../core/amg-tokens.css">
+  <link rel="stylesheet" href="../../../core/amg-stage.css">
+  <style>
+    /* مسودة NullMotion الهيكلية */
+    .amg-wireframe-box {
+      border: 2px dashed rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .amg-beat-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 8px;
+      background: #38bdf8;
+      color: #050508;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body class="amg-body">
+  <div id="amg-stage" class="amg-stage" data-aspect="16:9">
+    <div id="amg-camera-rig" class="amg-camera-rig">
+      
+      <!-- Scene 01 Draft -->
+      <section id="draft-scene-01" class="amg-scene">
+        <div class="amg-wireframe-box">
+          <span class="amg-beat-tag">HOOK BEAT (0s - 4s)</span>
+          <h1 style="font-size: 54px; margin: 0;">[ضربة العنوان الافتتاحي + أيقونة السحابة]</h1>
+          <p style="color: #94a3b8; font-size: 24px;">SC-001 Kinetic Slam Camera In</p>
+        </div>
+      </section>
+
+      <!-- Scene 02 Draft -->
+      <section id="draft-scene-02" class="amg-scene" style="opacity: 0;">
+        <div class="amg-wireframe-box">
+          <span class="amg-beat-tag" style="background:#6366f1; color:#fff;">MECHANISM & METRIC (4s - 8.5s)</span>
+          <h1 style="font-size: 54px; margin: 0;">[بطاقة المعمارية + عداد D3 النامي]</h1>
+          <p style="color: #94a3b8; font-size: 24px;">SC-032 Blueprint to Satori Morph</p>
+        </div>
+      </section>
+
+      <!-- Scene 03 Draft -->
+      <section id="draft-scene-03" class="amg-scene" style="opacity: 0;">
+        <div class="amg-wireframe-box">
+          <span class="amg-beat-tag" style="background:#10b981; color:#050508;">CLIMAX OUTRO (8.5s - 12s)</span>
+          <h1 style="font-size: 64px; margin: 0;">[شعار AMG + زر الإطلاق السينمائي]</h1>
+          <p style="color: #94a3b8; font-size: 24px;">SC-137 Final Lockup & CTA</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { initAMGStage } from '../../../core/amg-runtime.js';
+    const { clock, camera, hud, timeline } = initAMGStage({ durationMs: 12000, fps: 60 });
+
+    // كوريغرافيه المسودة لاختبار التوقيت فقط
+    // 0s - 4s: Scene 1
+    camera.keyframe(timeline, { scale: 1.0, duration: 800, ease: 'outExpo', start: 0 });
+
+    // 4s: انتقال خاطف لمشهد 2
+    timeline.add('#draft-scene-01', { opacity: [1, 0], duration: 300, ease: 'linear' }, 3900);
+    timeline.add('#draft-scene-02', { opacity: [0, 1], duration: 400, ease: 'linear' }, 4000);
+    camera.keyframe(timeline, { scale: 1.05, duration: 4000, ease: 'inOutQuad', start: 4000 });
+
+    // 8.5s: انتقال لمشهد 3
+    timeline.add('#draft-scene-02', { opacity: [1, 0], duration: 300, ease: 'linear' }, 8400);
+    timeline.add('#draft-scene-03', { opacity: [0, 1], duration: 400, ease: 'linear' }, 8500);
+    camera.keyframe(timeline, { scale: 1.0, duration: 1000, ease: 'outBack', start: 8500 });
+
+    window.AMG_ANIMATIC = { clock, camera };
+  </script>
+</body>
+</html>

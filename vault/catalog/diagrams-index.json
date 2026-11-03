@@ -1,0 +1,69 @@
+{
+  "totalDiagrams": 45,
+  "source": "cathrynlavery/diagram-design + wheresryan22/anatomy",
+  "families": [
+    {
+      "id": "system-architecture",
+      "name": "معمارية الأنظمة والسحابة",
+      "count": 8,
+      "diagrams": [
+        "layered-stack", "microservices-mesh", "client-server-gateway", "event-driven-bus",
+        "data-pipeline-dag", "hexagonal-ports", "cdn-edge-routing", "security-trust-zones"
+      ]
+    },
+    {
+      "id": "process-flow",
+      "name": "التدفق والعمليات والحالات",
+      "count": 7,
+      "diagrams": [
+        "linear-stepper", "branching-decision-tree", "swimlane-protocol", "state-machine-finite",
+        "cicd-deployment-flow", "feedback-control-loop", "user-journey-funnel"
+      ]
+    },
+    {
+      "id": "hierarchy-taxonomy",
+      "name": "الهياكل الشجرية والتصنيف",
+      "count": 6,
+      "diagrams": [
+        "org-hierarchy-tree", "radial-mindmap", "file-system-anatomy", "component-dom-tree",
+        "ontology-breakdown", "bracket-tournament"
+      ]
+    },
+    {
+      "id": "comparisons-matrices",
+      "name": "المقارنات والمصفوفات",
+      "count": 7,
+      "diagrams": [
+        "quadrant-2x2-matrix", "feature-comparison-grid", "before-after-split", "pros-cons-balance",
+        "tradeoff-triangle-radar", "tier-pricing-architecture", "venn-intersection-3"
+      ]
+    },
+    {
+      "id": "timelines-roadmaps",
+      "name": "الجداول الزمنية وخرائط الطريق",
+      "count": 6,
+      "diagrams": [
+        "horizontal-milestone-track", "vertical-changelog-stream", "gantt-phase-bars",
+        "evolution-era-axis", "sprint-velocity-wave", "release-train-schedule"
+      ]
+    },
+    {
+      "id": "cycles-flywheels",
+      "name": "الدورات والمدارات وحلقات النمو",
+      "count": 5,
+      "diagrams": [
+        "growth-flywheel-loop", "concentric-onion-layers", "hub-and-spoke-ecosystem",
+        "infinite-figure-eight", "planetary-orbit-system"
+      ]
+    },
+    {
+      "id": "concept-data-schemas",
+      "name": "تشريح البيانات والمفاهيم",
+      "count": 6,
+      "diagrams": [
+        "er-database-schema", "memory-buffer-layout", "packet-header-bitfield",
+        "neural-network-layers", "supply-chain-sankey", "iceberg-depth-model"
+      ]
+    }
+  ]
+}

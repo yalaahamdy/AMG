@@ -1,0 +1,138 @@
+{
+  "totalTechniques": 90,
+  "categories": [
+    {
+      "id": "01-typography-reveals",
+      "name": "تقنيات ظهور وتحريك النصوص",
+      "count": 12,
+      "items": [
+        { "id": "TECH-TYPO-01", "name": "maskSlideUp", "desc": "صعود الكلمات من خلف قناع غير مرئي مع دوران طفيف" },
+        { "id": "TECH-TYPO-02", "name": "highlighterSweep", "desc": "تظليل نصي بشريط أصفر أو ملون ينمو حركياً خلف النص" },
+        { "id": "TECH-TYPO-03", "name": "kineticStomp", "desc": "سقوط الكلمة من مقياس كبير مع اهتزاز كاميرا لحظي" },
+        { "id": "TECH-TYPO-04", "name": "odometerCounter", "desc": "عداد أرقام أسطواني يدور عمودياً للأرقام والنسب" },
+        { "id": "TECH-TYPO-05", "name": "typewriterTerminal", "desc": "كتابة سريعة بنمط الطرفية البرمجية مع مؤشر نابض" },
+        { "id": "TECH-TYPO-06", "name": "splitCurtainReveal", "desc": "انقسام العنوان أفقياً ليكشف عن المحتوى خلفه" },
+        { "id": "TECH-TYPO-07", "name": "elasticWordCascade", "desc": "تتابع دخول الكلمات بنابض فيزيائي مع حماية اتصال العربية" },
+        { "id": "TECH-TYPO-08", "name": "glitchDecodeText", "desc": "فك تشفير نص تقني سداسي عشري إلى الكلمة المستهدفة" },
+        { "id": "TECH-TYPO-09", "name": "gradientShimmerSweep", "desc": "لمعان ضوئي متدرج يمر داخل حروف العنوان" },
+        { "id": "TECH-TYPO-10", "name": "focusBlurPull", "desc": "انتقال النص من ضبابية شديدة وتباعد إلى وضوح تام" },
+        { "id": "TECH-TYPO-11", "name": "calloutTagPop", "desc": "ظهور شارة بيانات صغيرة مع خط إشارة" },
+        { "id": "TECH-TYPO-12", "name": "scrollingTickerMarquee", "desc": "شريط كلمات أو شعارات لا نهائي حتمي" }
+      ]
+    },
+    {
+      "id": "02-svg-draw-and-morph",
+      "name": "رسم المسارات والتحول الشكلي",
+      "count": 10,
+      "items": [
+        { "id": "TECH-SVG-01", "name": "blueprintDrawIn", "desc": "رسم المخطط أو الأيقونة خطاً بخط ثم ملء اللون" },
+        { "id": "TECH-SVG-02", "name": "seamlessShapeMorph", "desc": "تحويل شكل هندسي إلى شكل آخر بسلاسة عبر morphTo" },
+        { "id": "TECH-SVG-03", "name": "liquidConnectorFlow", "desc": "رسم خط ربط منحني مع إرسال نبضات ضوئية متحركة" },
+        { "id": "TECH-SVG-04", "name": "strokePulseWave", "desc": "إرسال موجة سمك وإضاءة عبر شبكة خطوط" },
+        { "id": "TECH-SVG-05", "name": "iconToCardExpand", "desc": "تحول إطار أيقونة صغيرة إلى بطاقة واجهة مستخدم كاملة" },
+        { "id": "TECH-SVG-06", "name": "selfErasingTrail", "desc": "مسار يرسم نفسه من الأمام ويمحو نفسه من الخلف" },
+        { "id": "TECH-SVG-07", "name": "polygonConstellation", "desc": "شبكة نقاط تتصل بخطوط متفاعلة ديناميكياً" },
+        { "id": "TECH-SVG-08", "name": "dashedOrbitRing", "desc": "حلقات متقطعة تدور باتجاهات وسرعات متعاكسة" },
+        { "id": "TECH-SVG-09", "name": "clipMaskGeometryExpand", "desc": "قناع هندسي يتمدد ليفتح المشهد التالي" },
+        { "id": "TECH-SVG-10", "name": "handDrawnRoughSketch", "desc": "تأثير الخط اليدوي عبر فلتر feDisplacementMap محكوم" }
+      ]
+    },
+    {
+      "id": "03-camera-choreography",
+      "name": "حركات الكاميرا السينمائية",
+      "count": 10,
+      "items": [
+        { "id": "TECH-CAM-01", "name": "cameraDollyZoom", "desc": "اقتراب درامي نحو نقطة تركيز محددة" },
+        { "id": "TECH-CAM-02", "name": "cameraWhipPan", "desc": "انتقال خاطف مع تفعيل ضبابية الحركة الأفقية" },
+        { "id": "TECH-CAM-03", "name": "cameraIsometricTilt", "desc": "تحويل المسرح من 2D إلى منظور إيزومتري 3D" },
+        { "id": "TECH-CAM-04", "name": "cameraTraumaShake", "desc": "اهتزاز فيزيائي متخامد عند وقوع حدث مؤثر" },
+        { "id": "TECH-CAM-05", "name": "cameraMultiPlaneParallax", "desc": "تحريك 4 طبقات عمق بسرعات مختلفة لإعطاء عمق واقعي" },
+        { "id": "TECH-CAM-06", "name": "cameraFollowPath", "desc": "تتبع مسار SVG غير مرئي عبر مخطط واسع" },
+        { "id": "TECH-CAM-07", "name": "cameraRackFocus", "desc": "نقل الوضوح من العنصر الأمامي إلى الخلفي" },
+        { "id": "TECH-CAM-08", "name": "cameraDutchRoll", "desc": "إمالة زاوية الكاميرا لإعطاء شعور بالتوتر" },
+        { "id": "TECH-CAM-09", "name": "cameraPortalDive", "desc": "اختراق لداخل شاشة أو أيقونة للانتقال للمشهد التالي" },
+        { "id": "TECH-CAM-10", "name": "cameraBreathingIdle", "desc": "حركة تنفسية بطيئة تمنع جمود اللقطة" }
+      ]
+    },
+    {
+      "id": "04-d3-animated-charts",
+      "name": "الرسوم البيانية والإحصائيات المتحركة بـ D3",
+      "count": 12,
+      "items": [
+        { "id": "TECH-D3-01", "name": "AnimatedLineChart", "desc": "رسم منحنى بياني ناعم مع تتبع الكاميرا لنقطة القمة" },
+        { "id": "TECH-D3-02", "name": "StackedAreaMorph", "desc": "تحول مساحات البيانات الطبقية واستيفاء ألوانها" },
+        { "id": "TECH-D3-03", "name": "RacingBarChart", "desc": "أعمدة متسابقة تتبادل المواضع بسلاسة" },
+        { "id": "TECH-D3-04", "name": "DonutGaugeReveal", "desc": "مؤشر دائري يمتلئ مع عداد رقمي في المنتصف" },
+        { "id": "TECH-D3-05", "name": "SankeyFlowDiagram", "desc": "تدفق البيانات عبر مسارات شريطية عريضة متفرعة" },
+        { "id": "TECH-D3-06", "name": "ForceDirectedNetwork", "desc": "شبكة علاقات ذاتية التوازن مع نقاط مترابطة" },
+        { "id": "TECH-D3-07", "name": "RadialSunburst", "desc": "مخطط هرمي دائري يتفتح من المركز للخارج" },
+        { "id": "TECH-D3-08", "name": "TreemapZoom", "desc": "مربعات مساحية تتمدد وتكشف محتواها الداخلي" },
+        { "id": "TECH-D3-09", "name": "CandlestickMarket", "desc": "شموع بيانية مالية تظهر بارتفاعات وتقلبات مدروسة" },
+        { "id": "TECH-D3-10", "name": "RadarSpiderChart", "desc": "مخطط عنكبوتي متعدد المحاور للمقارنة والمفاضلة" },
+        { "id": "TECH-D3-11", "name": "BubbleScatterPlot", "desc": "فقاعات متناثرة تتجمع وتفرز نفسها حسب المحاور" },
+        { "id": "TECH-D3-12", "name": "ChordRelationship", "desc": "حلقات علاقات متداخلة تضيء عند تفعيل الرابط" }
+      ]
+    },
+    {
+      "id": "05-editorial-diagrams-45",
+      "name": "المخططات التحريرية الـ 45 من diagram-design",
+      "count": 45,
+      "subfamilies": [
+        "System & Cloud Architecture (8)",
+        "Process, Flow & State (7)",
+        "Hierarchy & Taxonomy (6)",
+        "Comparisons & Matrices (7)",
+        "Timelines & Roadmaps (6)",
+        "Cycles, Flywheels & Orbits (5)",
+        "Concept & Data Schemas (6)"
+      ]
+    },
+    {
+      "id": "06-isometric-anatomy-3d",
+      "name": "التشريح الإيزومتري 3D من anatomy",
+      "count": 12,
+      "items": [
+        { "id": "TECH-ISO-01", "name": "IsoPlatformGrid", "desc": "منصة شبكية إيزومترية ترتفع من الأرض" },
+        { "id": "TECH-ISO-02", "name": "IsoExplodedStack", "desc": "تفكيك طبقات النظام عمودياً في الفضاء" },
+        { "id": "TECH-ISO-03", "name": "IsoServerCluster", "desc": "خوادم متراصة تنبض بأضواء بيانات خضراء وسماوية" },
+        { "id": "TECH-ISO-04", "name": "IsoCpuChipDie", "desc": "رقاقة معالج دقيقة تضيء مسارات الدوائر المطبوعة فيها" },
+        { "id": "TECH-ISO-05", "name": "IsoDataPipeline", "desc": "أنابيب نقل بيانات زجاجية ثلاثية الأبعاد" },
+        { "id": "TECH-ISO-06", "name": "IsoShieldFirewall", "desc": "درع أمني إيزومتري سداسي الأضلاع ينبض بالحماية" }
+      ]
+    },
+    {
+      "id": "07-satori-ui-cards",
+      "name": "بطاقات واجهات المستخدم من vercel/satori",
+      "count": 15,
+      "items": [
+        { "id": "TECH-SAT-01", "name": "SatoriCodeWindow", "desc": "نافذة كود بأزرار macOS ونصوص برمجية ملونة" },
+        { "id": "TECH-SAT-02", "name": "SatoriBrowserFrame", "desc": "إطار متصفح مع شريط عنوان وبطاقات تفاعلية" },
+        { "id": "TECH-SAT-03", "name": "SatoriMetricCard", "desc": "بطاقة إحصائيات مع نسبة نمو خضراء ومؤشر ميني" },
+        { "id": "TECH-SAT-04", "name": "SatoriAiChatPrompt", "desc": "مربع محادثة ذكاء اصطناعي بنمط الرد التوليدي" },
+        { "id": "TECH-SAT-05", "name": "SatoriNotificationToast", "desc": "إشعار طافٍ أنيق مع أيقونة وحركة دخول زجاجية" }
+      ]
+    },
+    {
+      "id": "08-transitions-and-backgrounds",
+      "name": "الانتقالات والخلفيات الشبكية",
+      "count": 10,
+      "items": [
+        { "id": "TECH-BG-01", "name": "gridParallaxWarp", "desc": "تحرك شبكي يعطي إحساس السفر عبر الفضاء" },
+        { "id": "TECH-BG-02", "name": "lightLeakAmbient", "desc": "بقعة ضوء محيطية ناعمة تتنقل بهدوء" },
+        { "id": "TECH-BG-03", "name": "splitWipeDiagonal", "desc": "مسح مائل سلس يفتح المشهد التالي" },
+        { "id": "TECH-BG-04", "name": "colorInvertStrobe", "desc": "عكس ألوان المشهد بلحظة واحدة مع النبض الموسيقي" }
+      ]
+    },
+    {
+      "id": "09-visual-accents",
+      "name": "المؤثرات البصرية المساعدة",
+      "count": 10,
+      "items": [
+        { "id": "TECH-ACC-01", "name": "burstLinesSpark", "desc": "شرارات انفجار خطية صغيرة عند ظهور عنصر مهم" },
+        { "id": "TECH-ACC-02", "name": "clickRippleWave", "desc": "موجة نقر دائرية تحاكي تفاعل المستخدم مع الزر" },
+        { "id": "TECH-ACC-03", "name": "handDrawnCircle", "desc": "دائرة تمييز مرسومة بخط اليد حول كلمة أو رقم" },
+        { "id": "TECH-ACC-04", "name": "crosshairHudMarker", "desc": "علامات استهداف هندسية تقنية في زوايا العنصر" }
+      ]
+    }
+  ]
+}

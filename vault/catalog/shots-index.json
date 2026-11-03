@@ -1,0 +1,105 @@
+{
+  "totalShots": 150,
+  "families": [
+    {
+      "id": "01-hook-openers",
+      "name": "لقطات الجذب الافتتاحية (0s - 3s)",
+      "count": 15,
+      "featured": [
+        { "id": "SC-001", "name": "Kinetic Slam", "vibe": "ضربة عنوان ضخمة مع ارتداد كاميرا" },
+        { "id": "SC-002", "name": "Question Typewriter", "vibe": "سؤال استفهامي يكتب بسرعة مع مؤشر وامض" },
+        { "id": "SC-003", "name": "Paradox Split", "vibe": "انقسام الشاشة إلى نقيضين متصارعين" },
+        { "id": "SC-004", "name": "Glitch Wakeup", "vibe": "استيقاظ تقني مع ومضات رقمية سريعة" },
+        { "id": "SC-005", "name": "Macro Zoom Out", "vibe": "ابتعاد سريع من تفصيل دقيق إلى المشهد الكامل" }
+      ]
+    },
+    {
+      "id": "02-problem-tension",
+      "name": "لقطات عرض المشكلة والتوتر",
+      "count": 15,
+      "featured": [
+        { "id": "SC-016", "name": "Chaos Clutter", "vibe": "تراكم فوضوي لبطاقات أو ملفات متصادمة" },
+        { "id": "SC-017", "name": "Red Bottleneck", "vibe": "أنبوب تدفق يختنق وتتحول عناصره للأحمر" },
+        { "id": "SC-018", "name": "Broken Pipeline", "vibe": "انقطاع خط الربط مع ظهور علامة خطأ" },
+        { "id": "SC-019", "name": "Overload Counter", "vibe": "عداد يتصاعد بجنون إلى المنطقة الحمراء" }
+      ]
+    },
+    {
+      "id": "03-hero-reveals",
+      "name": "لقطات الكشف الساحر عن الحل والمنتج",
+      "count": 15,
+      "featured": [
+        { "id": "SC-031", "name": "Silhouette Rim Reveal", "vibe": "إضاءة حواف المنتج في الظلام قبل وضوحه" },
+        { "id": "SC-032", "name": "Blueprint-to-Reality Satori Morph", "vibe": "تحول المخطط الهندسي إلى واجهة حية ملونة" },
+        { "id": "SC-033", "name": "Isometric Rise", "vibe": "ارتفاع المنصة ثلاثية الأبعاد بثبات وفخامة" },
+        { "id": "SC-034", "name": "Portal Mask Expand", "vibe": "توسع قناع هندسي يكشف المنظومة المتكاملة" }
+      ]
+    },
+    {
+      "id": "04-ui-walkthroughs",
+      "name": "استعراض الواجهات والتفاعل",
+      "count": 15,
+      "featured": [
+        { "id": "SC-046", "name": "Cursor Spotlight Click", "vibe": "مؤشر ماوس ذكي يتحرك وينقر لتنشيط ميزة" },
+        { "id": "SC-047", "name": "Bento Grid Cascade", "vibe": "تتابع دخول بطاقات شبكية بمرونة فيزيائية" },
+        { "id": "SC-048", "name": "Floating Card Stack", "vibe": "حزمة بطاقات تطوف في الفضاء ثلاثي الأبعاد" }
+      ]
+    },
+    {
+      "id": "05-system-architecture",
+      "name": "تدفق الأنظمة والمعمارية البرمجية",
+      "count": 15,
+      "featured": [
+        { "id": "SC-061", "name": "Node Graph Pulse", "vibe": "نبضات ضوئية تنتقل بين خوادم وقواعد بيانات" },
+        { "id": "SC-062", "name": "Isometric Layer Explode", "vibe": "تفكيك طبقات السحابة والمعالج عمودياً" },
+        { "id": "SC-063", "name": "Request-Response Ping", "vibe": "إرسال طلب سريع وعودة البيانات بلحظات" }
+      ]
+    },
+    {
+      "id": "06-data-metric-slams",
+      "name": "الأرقام والإحصائيات الصادمة",
+      "count": 15,
+      "featured": [
+        { "id": "SC-076", "name": "Odometer Rolling Stat", "vibe": "دوران أرقام متسارع يستقر على إنجاز قياسي" },
+        { "id": "SC-077", "name": "Chart Line Breakout", "vibe": "منحنى بياني يخترق سقف المخطط للأعلى" },
+        { "id": "SC-078", "name": "Scale Comparison Tower", "vibe": "مقارنة عمودية تبرز التفوق الحاسم" }
+      ]
+    },
+    {
+      "id": "07-comparisons-versus",
+      "name": "المقارنات الحاسمة قبل وبعد",
+      "count": 15,
+      "featured": [
+        { "id": "SC-091", "name": "Wipe Slider Split", "vibe": "خط فاصل يتحرك ليكشف الفرق الصادم" },
+        { "id": "SC-092", "name": "Old-vs-New Speed Race", "vibe": "سباق سرعة بين الطريقة القديمة والجديدة" }
+      ]
+    },
+    {
+      "id": "08-ecosystem-integrations",
+      "name": "التكامل والمنظومة الشاملة",
+      "count": 15,
+      "featured": [
+        { "id": "SC-106", "name": "Brand Constellation Orbit", "vibe": "شعارات التقنيات تدور ككواكب حول المنصة" },
+        { "id": "SC-107", "name": "Central Hub Magnet", "vibe": "جذب مغناطيسي لكافة الأدوات نحو المركز" }
+      ]
+    },
+    {
+      "id": "09-kinetic-transitions",
+      "name": "الانتقالات والتحولات الحركية",
+      "count": 15,
+      "featured": [
+        { "id": "SC-121", "name": "Shape Morph Bridge", "vibe": "شكل المشهد الحالي يتحول إلى شكل المشهد التالي" },
+        { "id": "SC-122", "name": "Whip Pan Match-Cut", "vibe": "حركة كاميرا خاطفة تتطابق مع بداية اللقطة التالية" }
+      ]
+    },
+    {
+      "id": "10-climax-outro-lockups",
+      "name": "الذروة والخاتمة والشعار",
+      "count": 15,
+      "featured": [
+        { "id": "SC-136", "name": "Tagline Stagger Lockup", "vibe": "تجمع أنيق للشعار والعنوان النهائي" },
+        { "id": "SC-137", "name": "CTA Magnetic Button", "vibe": "زر دعوة لاتخاذ إجراء ينبض بجاذبية عالية" }
+      ]
+    }
+  ]
+}

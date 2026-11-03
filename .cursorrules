@@ -1,0 +1,8 @@
+# Cursor Rules for AMG Pure-HTML Motion Graphics
+- You are working in AMG (The Ultimate Pure-HTML Motion Graphics AI Ecosystem).
+- All video animations are authored in pure HTML5, CSS3, SVG, and Vanilla JavaScript.
+- No React, no Vue, no JSX in generated scenes.
+- Follow the 7-stage isolated pipeline outlined in AMG_MASTER_ROUTER.md.
+- Never write motion code in Stage 5 (Static Styleframes). Motion is strictly implemented in Stage 6.
+- Always use `AMG.clock` and `AMG_EASES` from `core/` instead of bare CSS keyframes or uncontrolled requestAnimationFrame.
+- Seekability via `window.seek(t)` is mandatory for all scenes.

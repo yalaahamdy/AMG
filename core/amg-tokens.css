@@ -1,0 +1,110 @@
+/**
+ * AMG Design Tokens & Theming System
+ * The Ultimate Pure-HTML Motion Graphics AI Ecosystem
+ */
+
+:root {
+  /* أبعاد المسرح القياسية */
+  --amg-width: 1920px;
+  --amg-height: 1080px;
+  --amg-safe-margin: 54px; /* 5% Title Safe Area */
+
+  /* نظام الألوان الافتراضي (Dark Flagship - Apple/Linear Style) */
+  --amg-bg: #050508;
+  --amg-bg-elevated: #0f1015;
+  --amg-text-primary: #ffffff;
+  --amg-text-secondary: #94a3b8;
+  --amg-text-muted: #475569;
+  --amg-border-hairline: rgba(255, 255, 255, 0.12);
+  --amg-border-specular: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.04) 100%);
+  
+  --amg-accent-primary: #38bdf8;   /* Sky Cyan */
+  --amg-accent-secondary: #6366f1; /* Electric Indigo */
+  --amg-accent-glow: rgba(56, 189, 248, 0.25);
+  --amg-warning: #f59e0b;
+  --amg-danger: #ef4444;
+  --amg-success: #10b981;
+
+  /* أنظمة الخطوط القياسية */
+  --amg-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --amg-font-display: 'Inter Display', 'Geist', var(--amg-font-sans);
+  --amg-font-arabic: 'IBM Plex Sans Arabic', 'Cairo', 'Tajawal', sans-serif;
+  --amg-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ثوابت الحركة الفيزيائية */
+  --amg-ease-in-out-cinematic: cubic-bezier(0.83, 0, 0.17, 1);
+  --amg-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --amg-ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* الثيم التحريري الدافئ (Vox / Editorial Style) */
+[data-amg-theme="editorial-warm"] {
+  --amg-bg: #f4f1ea;
+  --amg-bg-elevated: #ffffff;
+  --amg-text-primary: #121316;
+  --amg-text-secondary: #4a4d52;
+  --amg-text-muted: #8c8f94;
+  --amg-border-hairline: rgba(20, 20, 20, 0.12);
+  --amg-accent-primary: #e63946;
+  --amg-accent-secondary: #1d3557;
+  --amg-accent-glow: rgba(230, 57, 70, 0.2);
+  --amg-font-display: 'Playfair Display', 'Instrument Serif', Georgia, serif;
+}
+
+/* ثيم المخطط الهندسي (Blueprint Carbon) */
+[data-amg-theme="blueprint-carbon"] {
+  --amg-bg: #0a0e17;
+  --amg-bg-elevated: #111827;
+  --amg-text-primary: #f8fafc;
+  --amg-text-secondary: #94a3b8;
+  --amg-border-hairline: #1e293b;
+  --amg-accent-primary: #38bdf8;
+  --amg-accent-secondary: #0ea5e9;
+  --amg-accent-glow: rgba(56, 189, 248, 0.3);
+}
+
+/* ثيم التباين العالي (High-Contrast Neon/Reels) */
+[data-amg-theme="high-contrast-pop"] {
+  --amg-bg: #09090b;
+  --amg-bg-elevated: #18181b;
+  --amg-text-primary: #ffffff;
+  --amg-text-secondary: #a1a1aa;
+  --amg-border-hairline: rgba(255, 255, 255, 0.2);
+  --amg-accent-primary: #ccff00;
+  --amg-accent-secondary: #ff3366;
+  --amg-accent-glow: rgba(204, 255, 0, 0.3);
+}
+
+/* ثيم الموشن العربي الأصيل (Arabic Infographics) */
+[data-amg-theme="arabic-editorial"] {
+  --amg-bg: #0c121e;
+  --amg-bg-elevated: #151d2d;
+  --amg-text-primary: #ffffff;
+  --amg-text-secondary: #cbd5e1;
+  --amg-text-muted: #64748b;
+  --amg-border-hairline: rgba(255, 255, 255, 0.1);
+  --amg-accent-primary: #f59e0b;
+  --amg-accent-secondary: #06b6d4;
+  --amg-accent-glow: rgba(245, 158, 11, 0.25);
+  --amg-font-display: var(--amg-font-arabic);
+}
+
+/* الحفاظ على دقة خطوط SVG عند التقريب (Non-Scaling Stroke) */
+.amg-crisp-stroke path,
+.amg-crisp-stroke line,
+.amg-crisp-stroke polyline,
+.amg-crisp-stroke polygon,
+.amg-crisp-stroke circle,
+.amg-crisp-stroke rect {
+  vector-effect: non-scaling-stroke !important;
+}
+
+/* منطقة الأمان للعناوين والتراكيب */
+.amg-safe-boundary {
+  position: absolute;
+  top: var(--amg-safe-margin);
+  left: var(--amg-safe-margin);
+  right: var(--amg-safe-margin);
+  bottom: var(--amg-safe-margin);
+  pointer-events: none;
+}

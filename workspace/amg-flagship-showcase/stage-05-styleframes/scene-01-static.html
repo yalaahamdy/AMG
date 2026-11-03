@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene 01 Static Styleframe (Stage 5)</title>
+  <link rel="stylesheet" href="../../../core/amg-tokens.css">
+  <link rel="stylesheet" href="../../../core/amg-stage.css">
+  <style>
+    @scope (#s01-root) {
+      .scene-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 20px;
+        background: rgba(56, 189, 248, 0.12);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        color: #38bdf8;
+        font-family: var(--amg-font-sans);
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
+      .hero-title {
+        font-family: var(--amg-font-arabic);
+        font-size: 78px;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 16px 0;
+        text-align: center;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+      .hero-sub {
+        font-family: var(--amg-font-arabic);
+        font-size: 26px;
+        color: #94a3b8;
+        margin: 0 0 48px 0;
+        text-align: center;
+        max-width: 800px;
+      }
+      .cloud-icon-box {
+        width: 160px;
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 32px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+      .cloud-svg {
+        width: 90px;
+        height: 90px;
+        color: #38bdf8;
+      }
+    }
+  </style>
+</head>
+<body class="amg-body">
+  <div id="amg-stage" class="amg-stage amg-crisp-stroke" data-aspect="16:9">
+    <div id="amg-camera-rig" class="amg-camera-rig">
+      <section id="s01-root" class="amg-scene">
+        <div class="scene-card">
+          <div class="badge">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#38bdf8;"></span>
+            معمارية موشن جرافيك الويب النقي
+          </div>
+          <h1 class="hero-title">قوة الموشن جرافيك بـ HTML</h1>
+          <p class="hero-sub">بدون برامج ثقيلة، وبدون تصدير معقد. سينما بصرية متكاملة تقاد بأذكى مراحل التخطيط الهندسي.</p>
+          <div class="cloud-icon-box">
+            <svg class="cloud-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path id="s01-hero-cloud" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" pathLength="100"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- في المرحلة 5: صفر كود تحريك! تم التحقق من جمال التكوين واستقرار العناصر -->
+</body>
+</html>

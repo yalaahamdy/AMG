@@ -1,0 +1,63 @@
+{
+  "projectSlug": "amg-flagship-showcase",
+  "trackId": "02-flagship-product-launch",
+  "resolution": { "width": 1920, "height": 1080, "fps": 60 },
+  "totalDurationMs": 12000,
+  "seed": 42069,
+  "scenes": [
+    {
+      "sceneId": "scene-01",
+      "title": "قوة موشن جرافيك الويب النقي",
+      "startMs": 0,
+      "endMs": 4000,
+      "shotcraftCardId": "SC-001",
+      "cameraRig": {
+        "initial": { "scale": 1.25, "rotateZ": -1.5 },
+        "target": { "scale": 1.0, "rotateZ": 0 },
+        "ease": "outExpo"
+      },
+      "morphBridgeToNext": {
+        "type": "svg-morph-and-whip-pan",
+        "sourceElementId": "#s01-hero-cloud",
+        "targetElementId": "#s02-hero-card",
+        "transitionDurationMs": 500
+      }
+    },
+    {
+      "sceneId": "scene-02",
+      "title": "أداء حتمي وذكاء لا نهائي",
+      "startMs": 4000,
+      "endMs": 8500,
+      "shotcraftCardId": "SC-032",
+      "cameraRig": {
+        "initial": { "x": -1920, "scale": 0.95 },
+        "target": { "x": 0, "scale": 1.0 },
+        "ease": "outExpo"
+      },
+      "morphBridgeToNext": {
+        "type": "camera-dolly-zoom",
+        "sourceElementId": "#s02-metric-badge",
+        "targetElementId": "#s03-lockup-logo",
+        "transitionDurationMs": 600
+      }
+    },
+    {
+      "sceneId": "scene-03",
+      "title": "إطلاق المنظومة: AMG",
+      "startMs": 8500,
+      "endMs": 12000,
+      "shotcraftCardId": "SC-137",
+      "cameraRig": {
+        "initial": { "scale": 1.08, "rotateZ": 1.0 },
+        "target": { "scale": 1.0, "rotateZ": 0 },
+        "ease": "outBack"
+      },
+      "morphBridgeToNext": {
+        "type": "final-hold",
+        "sourceElementId": "#s03-lockup-logo",
+        "targetElementId": "#s03-lockup-logo",
+        "transitionDurationMs": 0
+      }
+    }
+  ]
+}

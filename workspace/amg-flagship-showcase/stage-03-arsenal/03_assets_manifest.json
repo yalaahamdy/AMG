@@ -1,0 +1,13 @@
+{
+  "projectSlug": "amg-flagship-showcase",
+  "iconsUsed": [
+    { "id": "icon-cloud", "source": "lucide", "selector": "#s01-hero-cloud" },
+    { "id": "icon-cpu", "source": "lucide", "selector": "#s02-hero-cpu" },
+    { "id": "icon-trending-up", "source": "lucide", "selector": "#s02-trending" },
+    { "id": "icon-shield-check", "source": "lucide", "selector": "#s02-shield" },
+    { "id": "icon-github", "source": "simple-icons", "selector": "#s03-gh" }
+  ],
+  "satoriCards": [
+    { "id": "satori-metric-card", "selector": "#s02-metric-card" }
+  ]
+}

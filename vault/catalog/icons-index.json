@@ -1,0 +1,36 @@
+{
+  "totalIconsCount": 9500,
+  "sources": ["simple-icons", "lucide", "tabler-icons"],
+  "domains": [
+    {
+      "id": "ai-ml",
+      "name": "الذكاء الاصطناعي وتعلم الآلة",
+      "keywords": ["ai", "robot", "brain", "neural", "openai", "gemini", "anthropic", "deepseek", "chip", "model"],
+      "icons": ["cpu", "brain", "sparkles", "bot", "network", "wand-2", "circuit-board", "openai", "google", "anthropic"]
+    },
+    {
+      "id": "cloud-devops",
+      "name": "السحابة وهندسة البرمجيات",
+      "keywords": ["cloud", "server", "database", "docker", "kubernetes", "aws", "azure", "git", "terminal", "deploy"],
+      "icons": ["cloud", "server", "database", "git-branch", "terminal", "container", "shield", "layers", "aws", "github"]
+    },
+    {
+      "id": "finance-crypto",
+      "name": "المالية والأعمال والعملات",
+      "keywords": ["money", "wallet", "dollar", "crypto", "bitcoin", "card", "chart", "trending", "analytics"],
+      "icons": ["wallet", "credit-card", "coins", "trending-up", "dollar-sign", "pie-chart", "bar-chart-3", "scale", "bank"]
+    },
+    {
+      "id": "security-privacy",
+      "name": "الأمن السيبراني والخصوصية",
+      "keywords": ["lock", "shield", "key", "firewall", "auth", "safe", "fingerprint", "eye", "protection"],
+      "icons": ["shield-check", "lock", "key", "fingerprint", "eye-off", "shield-alert", "file-lock", "scan-face"]
+    },
+    {
+      "id": "ui-actions",
+      "name": "تفاعلات الواجهة والتنقل",
+      "keywords": ["arrow", "chevron", "search", "menu", "check", "close", "cursor", "click", "play", "plus"],
+      "icons": ["arrow-right", "arrow-left", "search", "check", "x", "play", "mouse-pointer", "plus", "refresh-cw"]
+    }
+  ]
+}

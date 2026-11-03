@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMG Scene Styleframe Template</title>
+  <link rel="stylesheet" href="../../core/amg-tokens.css">
+  <link rel="stylesheet" href="../../core/amg-stage.css">
+  <style>
+    /* تنسيقات المشهد المعزول */
+    @scope (#amg-scene-01) {
+      .scene-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .hero-title {
+        font-family: var(--amg-font-display, 'IBM Plex Sans Arabic', sans-serif);
+        font-size: 72px;
+        font-weight: 700;
+        color: var(--amg-text-primary, #ffffff);
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      .visual-content {
+        width: 800px;
+        height: 480px;
+        position: relative;
+      }
+    }
+  </style>
+</head>
+<body class="amg-body">
+  <div id="amg-stage" class="amg-stage amg-crisp-stroke" data-aspect="16:9">
+    <div id="amg-camera-rig" class="amg-camera-rig">
+      <section id="amg-scene-01" class="amg-scene" data-scene-index="1">
+        <div class="scene-container">
+          <!-- محتوى المشهد البصري الثابت (المرحلة 5) -->
+          <h1 class="hero-title" data-amg-role="title">عنوان المشهد الرئيسي</h1>
+          <div class="visual-content" data-amg-role="hero-visual">
+            <!-- مسارات SVG أو المخطط هنا -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script type="module">
+    // في المرحلة 5: لا يوجد كود تحريك إطلاقاً!
+    // في المرحلة 6: يتم استيراد نواة التحريك وتطبيق Anime.js v4
+  </script>
+</body>
+</html>
