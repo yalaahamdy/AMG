@@ -18,6 +18,8 @@ export * from './amg-physics-rules.js';
 export * from './amg-studio-physics.js';
 export { AMGVisionGuard } from './amg-vision-guard.js';
 export { AMGNullMotionHUD } from './amg-nullmotion-hud.js';
+export { AMGNullMotionHUDPro } from './amg-nullmotion-hud-pro.js';
+export { AMGWebCodecsRecorder } from './amg-webcodecs-recorder.js';
 
 /**
  * دالة التهيئة السريعة لمشهد كامل بسطر واحد (نمط Ponytail)
@@ -25,7 +27,7 @@ export { AMGNullMotionHUD } from './amg-nullmotion-hud.js';
 export function initAMGStage({ durationMs = 15000, fps = 60, seed = 1337 } = {}) {
   const clock = new AMGClock({ durationMs, fps, seed });
   const camera = new AMGCameraRig('#amg-camera-rig', clock);
-  const hud = new AMGNullMotionHUD(clock);
+  const hud = new AMGNullMotionHUDPro(clock);
   const vision = new AMGVisionGuard({ stageWidth: 1920, stageHeight: 1080 });
 
   return { clock, camera, hud, vision, timeline: clock.masterTimeline };

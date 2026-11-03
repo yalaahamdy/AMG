@@ -21,8 +21,10 @@ export class AMGClock {
       defaults: { ease: 'outQuart', duration: 800 }
     });
 
-    this._setupResponsiveScaler();
-    this._installGlobalHooks();
+    if (typeof window !== 'undefined') {
+      this._setupResponsiveScaler();
+      this._installGlobalHooks();
+    }
   }
 
   /**
@@ -54,9 +56,11 @@ export class AMGClock {
     for (const listener of this.tickListeners) {
       listener(clampedMs, clampedMs / this.durationMs);
     }
-    window.dispatchEvent(new CustomEvent('amg:seek', { 
-      detail: { timeMs: clampedMs, timeSec: clampedMs / 1000, progress: clampedMs / this.durationMs } 
-    }));
+    if (typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('amg:seek', { 
+        detail: { timeMs: clampedMs, timeSec: clampedMs / 1000, progress: clampedMs / this.durationMs } 
+      }));
+    }
     return clampedMs;
   }
 
