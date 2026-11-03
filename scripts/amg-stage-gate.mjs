@@ -104,12 +104,25 @@ if (stageNum === 1) {
       passed = false;
       errors.push('لا توجد ملفات مشاهد محركة في stage-06-motion-scenes/.');
     } else {
-      // فحص حظر المنحنيات البدائية (Banned Generic Eases Gate)
+      // فحص حظر المنحنيات البدائية (Banned Generic Eases Gate) وحماية التايبوجرافي العربي
       files.forEach(f => {
         const content = fs.readFileSync(path.join(motionDir, f), 'utf-8');
         if (content.includes("ease: 'linear'") || content.includes('ease: "linear"')) {
           passed = false;
           errors.push(`الملف ${f} يستخدم منحنى حركي خطي جامد (ease: 'linear'). يُحظر استخدام المنحنيات الخطية على العناصر الرئيسية؛ استخدم منحنيات AMG_STUDIO_EASES أو نوابض AMG_SPRINGS.`);
+        }
+
+        // فحص حماية التايبوجرافي العربي ومنع تكسير الحروف
+        const arabicRegex = /[\u0600-\u06FF]/;
+        if (arabicRegex.test(content)) {
+          if (content.includes("mode: 'chars'") || content.includes('mode: "chars"')) {
+            passed = false;
+            errors.push(`الملف ${f}: يحظر تفكيك النصوص العربية إلى حروف منفصلة (mode: 'chars') لأن ذلك يكسر اتصال الكلمات. استخدم 'words' أو AMGArabicTypographyPro.`);
+          }
+          if (content.includes('amg-char') && /<span[^>]*class="[^"]*amg-char[^"]*"[^>]*>[\u0600-\u06FF]/.test(content)) {
+            passed = false;
+            errors.push(`الملف ${f}: تم رصد تفكيك حروف عربية فردية داخل وسوم amg-char! هذا خرق لدستور AGENTS.md.`);
+          }
         }
       });
     }

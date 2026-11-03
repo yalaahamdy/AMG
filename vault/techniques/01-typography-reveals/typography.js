@@ -3,6 +3,8 @@
  * The Ultimate Pure-HTML Motion Graphics AI Ecosystem
  */
 import { prepareKineticText, animateKineticReveal } from '../../../core/amg-text-engine.js';
+import { AMGArabicTypographyPro, AMG_ARABIC_SCALES } from '../../../core/amg-arabic-typography-pro.js';
+import { AMG_STUDIO_EASES } from '../../../core/amg-studio-physics.js';
 import { stagger } from '../../../core/vendor/anime.esm.js';
 
 export const typographyTechniques = {
@@ -13,6 +15,45 @@ export const typographyTechniques = {
     const units = prepareKineticText(targetSelector, { mode: 'auto' });
     animateKineticReveal(timeline, units, { start, duration, staggerMs, ease });
     return units;
+  },
+
+  /**
+   * صعود الكلمات العربية السينمائي مع القناع المائل وعزل الحروف المتصلة (Cinematic Arabic Slanted Mask)
+   */
+  arabicSlantedMaskSlide(timeline, targetSelector, {
+    start = 0,
+    duration = 750,
+    staggerMs = 65,
+    slantedAngle = 3.5,
+    ease = AMG_STUDIO_EASES.snappyOut
+  } = {}) {
+    const units = AMGArabicTypographyPro.prepareText(targetSelector, { mode: 'words', slantedAngle });
+    AMGArabicTypographyPro.animateReveal(timeline, units, { start, duration, staggerMs, ease });
+    return units;
+  },
+
+  /**
+   * قلم التظليل العربي المتوافق مع اتجاه اليمين إلى اليسار (RTL Highlighter Sweep)
+   */
+  arabicRTLHighlighter(timeline, highlighterSelector, {
+    start = 0,
+    duration = 600,
+    ease = AMG_STUDIO_EASES.snappyOut
+  } = {}) {
+    AMGArabicTypographyPro.animateRTLHighlight(timeline, highlighterSelector, { start, duration, ease });
+  },
+
+  /**
+   * نبض وزن الخط المتغير للكلمات البارزة (Variable Font Weight Punch)
+   */
+  arabicVariableWeightPunch(timeline, targetSelector, {
+    fromWeight = 300,
+    toWeight = 800,
+    duration = 500,
+    start = 0,
+    ease = AMG_STUDIO_EASES.overshoot
+  } = {}) {
+    AMGArabicTypographyPro.animateWeight(timeline, targetSelector, { fromWeight, toWeight, duration, start, ease });
   },
 
   /**
