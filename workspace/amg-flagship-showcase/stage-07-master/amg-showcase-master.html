@@ -173,12 +173,15 @@
     </div>
   </div>
 
-  <script type="module">
-    import { initAMGStage, drawSVG, prepareKineticText, animateKineticReveal, registerAmbientAliveLoop } from '../../../core/amg-runtime.js';
+  <!-- مكتبات UMD غير المتأثرة بقيود CORS عند فتح الملف مباشرة عبر file:/// -->
+  <script src="../../../core/vendor/anime.umd.min.js"></script>
+  <script src="../../../core/vendor/d3.min.js"></script>
+  <script src="../../../core/amg-runtime-iife.js"></script>
 
-    // 1. تهيئة النواة المشتركة للمشروع الكامل
-    const { clock, camera, hud, timeline } = initAMGStage({ durationMs: 12000, fps: 60 });
-    registerAmbientAliveLoop(clock, '#amg-stage');
+  <script>
+    // 1. تهيئة النواة المشتركة للمشروع الكامل متوافقة 100% مع file:///
+    const { clock, camera, hud, timeline } = AMG.initAMGStage({ durationMs: 12000, fps: 60 });
+    AMG.registerAmbientAliveLoop(clock, '#amg-stage');
 
     /* ========================================================
        المشهد 1 (0s - 4000ms): Kinetic Slam Hook
@@ -189,15 +192,15 @@
 
     timeline.add('#m-s01-badge', { opacity: [0, 1], translateY: [-15, 0], duration: 400, ease: 'outExpo' }, 100);
 
-    const titleUnits = prepareKineticText('#m-s01-title', { mode: 'words' });
-    animateKineticReveal(timeline, titleUnits, { start: 180, duration: 800, staggerMs: 70, ease: 'outExpo' });
+    const titleUnits = AMG.prepareKineticText('#m-s01-title', { mode: 'words' });
+    AMG.animateKineticReveal(timeline, titleUnits, { start: 180, duration: 800, staggerMs: 70, ease: 'outExpo' });
 
     timeline.add('#m-s01-sub', { opacity: [0, 1], translateY: [12, 0], duration: 600, ease: 'outQuad' }, 450);
 
     timeline.add('#m-s01-cloud-box', { opacity: [0, 1], scale: [0.8, 1.0], duration: 600, ease: 'outBack' }, 350);
-    drawSVG(timeline, '#m-s01-cloud-path', { start: 450, duration: 900, ease: 'inOutQuad' });
+    AMG.drawSVG(timeline, '#m-s01-cloud-path', { start: 450, duration: 900, ease: 'inOutQuad' });
 
-    // انتقال المشهد 1 إلى 2 عند 3800ms (Whip Pan Match-Cut)
+    // انتقال المشهد 1 إلى 2 عند 3700ms
     timeline.add('#master-s01', { opacity: [1, 0], translateX: [0, -60], duration: 300, ease: 'inExpo' }, 3700);
 
     /* ========================================================
@@ -209,7 +212,7 @@
     timeline.add('#m-s02-text', { opacity: [0, 1], translateX: [40, 0], duration: 600, ease: 'outExpo' }, 4100);
     timeline.add('#m-s02-visual', { opacity: [0, 1], scale: [0.93, 1.0], duration: 700, ease: 'outBack' }, 4200);
 
-    drawSVG(timeline, '#m-s02-curve', { start: 4400, duration: 1100, ease: 'inOutCubic' });
+    AMG.drawSVG(timeline, '#m-s02-curve', { start: 4400, duration: 1100, ease: 'inOutCubic' });
     timeline.add('#m-s02-dot', { opacity: [0, 1], scale: [0, 1], duration: 400, ease: 'outBack' }, 5400);
 
     const statEl = document.querySelector('#m-s02-stat');
@@ -223,7 +226,7 @@
       }
     }, 4400);
 
-    // انتقال المشهد 2 إلى 3 عند 8200ms
+    // انتقال المشهد 2 إلى 3 عند 8150ms
     timeline.add('#master-s02', { opacity: [1, 0], scale: [1, 0.95], duration: 350, ease: 'inExpo' }, 8150);
 
     /* ========================================================
@@ -253,7 +256,7 @@
       ease: 'outBack'
     }, 9100);
 
-    console.log('AMG Flagship Master Production Loaded Successfully.');
+    console.log('AMG Flagship Master Production (Zero-CORS Native) Initialized Successfully.');
   </script>
 </body>
 </html>

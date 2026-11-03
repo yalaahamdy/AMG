@@ -4,6 +4,8 @@
   "description": "The Ultimate Pure-HTML Motion Graphics AI Ecosystem",
   "type": "module",
   "scripts": {
+    "start": "node scripts/amg-preview.mjs",
+    "preview": "node scripts/amg-preview.mjs",
     "init-project": "node scripts/amg-init.mjs",
     "query": "node scripts/amg-query.mjs",
     "stage-gate": "node scripts/amg-stage-gate.mjs",

@@ -248,12 +248,15 @@
     </div>
   </div>
 
-  <script type="module">
-    import { initAMGStage, drawSVG, prepareKineticText, animateKineticReveal, registerAmbientAliveLoop } from '../../../core/amg-runtime.js';
+  <!-- مكتبات UMD غير المتأثرة بقيود CORS عند فتح الملف مباشرة عبر file:/// -->
+  <script src="../../../core/vendor/anime.umd.min.js"></script>
+  <script src="../../../core/vendor/d3.min.js"></script>
+  <script src="../../../core/amg-runtime-iife.js"></script>
 
-    // 1. تهيئة النواة الشاملة للمشروع (15000ms @ 60fps)
-    const { clock, camera, hud, timeline } = initAMGStage({ durationMs: 15000, fps: 60 });
-    registerAmbientAliveLoop(clock, '#amg-stage');
+  <script>
+    // تهيئة النواة الشاملة للمشروع (15000ms @ 60fps) متوافقة 100% مع file:///
+    const { clock, camera, hud, timeline } = AMG.initAMGStage({ durationMs: 15000, fps: 60 });
+    AMG.registerAmbientAliveLoop(clock, '#amg-stage');
 
     /* ========================================================
        المشهد 1 (0ms - 3800ms): SC-005 Macro Dive
@@ -264,8 +267,8 @@
 
     timeline.add('#m-s01-badge', { opacity: [0, 1], translateY: [-16, 0], duration: 400, ease: 'outExpo' }, 100);
 
-    const titleUnits = prepareKineticText('#m-s01-title', { mode: 'words' });
-    animateKineticReveal(timeline, titleUnits, { start: 180, duration: 750, staggerMs: 70, ease: 'outExpo' });
+    const titleUnits = AMG.prepareKineticText('#m-s01-title', { mode: 'words' });
+    AMG.animateKineticReveal(timeline, titleUnits, { start: 180, duration: 750, staggerMs: 70, ease: 'outExpo' });
 
     timeline.add('#m-s01-sub', { opacity: [0, 1], translateY: [12, 0], duration: 550, ease: 'outQuad' }, 400);
     timeline.add('#m-s01-box', { opacity: [0, 1], scale: [0.92, 1.0], duration: 600, ease: 'outBack' }, 300);
@@ -273,7 +276,7 @@
     timeline.add('#m-s01-asm', { opacity: [0, 1], translateY: [8, 0], duration: 500, ease: 'outExpo' }, 1600);
     timeline.add('#m-s01-bin', { opacity: [0, 1], scale: [0.95, 1.0], duration: 600, ease: 'outExpo' }, 2200);
 
-    // انتقال المشهد 1 إلى 2 عند 3650ms
+    // انتقال المشهد 1 إلى 2 عند 3600ms
     timeline.add('#sc-01', { opacity: [1, 0], scale: [1, 1.1], duration: 300, ease: 'inExpo' }, 3600);
 
     /* ========================================================
@@ -298,7 +301,7 @@
       ease: 'outExpo'
     }, 4500);
 
-    drawSVG(timeline, '#m-silicon-path', { start: 4600, duration: 1200, ease: 'inOutQuad' });
+    AMG.drawSVG(timeline, '#m-silicon-path', { start: 4600, duration: 1200, ease: 'inOutQuad' });
 
     // وميض البوابات المنطقية AND / OR / NOT
     timeline.add('#m-gate-and', { background: ['transparent', 'rgba(245,158,11,0.3)', 'transparent'], duration: 600 }, 5800);
@@ -317,12 +320,12 @@
 
     timeline.add('#m-s03-chip', { opacity: [0, 1], scale: [0.7, 1.0], duration: 650, ease: 'outBack' }, 10550);
 
-    const outroUnits = prepareKineticText('#m-s03-title', { mode: 'words' });
-    animateKineticReveal(timeline, outroUnits, { start: 10750, duration: 750, staggerMs: 65, ease: 'outExpo' });
+    const outroUnits = AMG.prepareKineticText('#m-s03-title', { mode: 'words' });
+    AMG.animateKineticReveal(timeline, outroUnits, { start: 10750, duration: 750, staggerMs: 65, ease: 'outExpo' });
 
     timeline.add('#m-s03-sub', { opacity: [0, 1], translateY: [15, 0], duration: 600, ease: 'outQuad' }, 11100);
 
-    // عداد تردد المعالج المباشر بـ D3
+    // عداد تردد المعالج المباشر
     const freqEl = document.querySelector('#m-s03-freq');
     const proxyFreq = { val: 0 };
     timeline.add(proxyFreq, {
@@ -334,7 +337,7 @@
       }
     }, 10800);
 
-    console.log('AMG Machine Language Master Production Initialized.');
+    console.log('AMG Machine Language Master Production (Zero-CORS Native) Initialized Successfully.');
   </script>
 </body>
 </html>
