@@ -9,6 +9,7 @@ export * from './amg-svg-utils.js';
 export * from './amg-d3-bridge.js';
 export * from './amg-text-engine.js';
 export * from './amg-physics-rules.js';
+export { AMGVisionGuard } from './amg-vision-guard.js';
 export { AMGNullMotionHUD } from './amg-nullmotion-hud.js';
 
 /**
@@ -18,6 +19,7 @@ export function initAMGStage({ durationMs = 15000, fps = 60, seed = 1337 } = {})
   const clock = new AMGClock({ durationMs, fps, seed });
   const camera = new AMGCameraRig('#amg-camera-rig', clock);
   const hud = new AMGNullMotionHUD(clock);
+  const vision = new AMGVisionGuard({ stageWidth: 1920, stageHeight: 1080 });
 
-  return { clock, camera, hud, timeline: clock.masterTimeline };
+  return { clock, camera, hud, vision, timeline: clock.masterTimeline };
 }

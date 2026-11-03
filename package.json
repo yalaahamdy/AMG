@@ -9,6 +9,7 @@
     "init-project": "node scripts/amg-init.mjs",
     "query": "node scripts/amg-query.mjs",
     "stage-gate": "node scripts/amg-stage-gate.mjs",
+    "vision-audit": "node scripts/amg-vision-audit.mjs",
     "verify-dom": "node scripts/amg-verify-dom.mjs",
     "bundle": "node scripts/amg-bundle-master.mjs",
     "satori": "node scripts/amg-satori-compile.mjs"

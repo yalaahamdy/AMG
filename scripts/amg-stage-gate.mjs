@@ -68,7 +68,24 @@ if (stageNum === 1) {
         passed = false;
         errors.push(`الملف ${f} يحتوي على كود تحريك! خرق صارم لقاعدة المرحلة 5 (يمنع كتابة أي كود تحريك في مرحلة اللوحات الثابتة).`);
       }
+      // فحص الإدراك الفراغي
+      if (!content.includes('viewBox') && content.includes('<svg')) {
+        passed = false;
+        errors.push(`الملف ${f}: عنصر SVG يفتقر إلى سمة viewBox صالحة.`);
+      }
     });
+  }
+} else if (stageNum === 6) {
+  const motionDir = path.join(projectDir, 'stage-06-motion-scenes');
+  if (!fs.existsSync(motionDir)) {
+    passed = false;
+    errors.push('مجلد المشاهد المحركة stage-06-motion-scenes/ غير موجود.');
+  } else {
+    const files = fs.readdirSync(motionDir).filter(f => f.endsWith('.html'));
+    if (files.length === 0) {
+      passed = false;
+      errors.push('لا توجد ملفات مشاهد محركة في stage-06-motion-scenes/.');
+    }
   }
 }
 
