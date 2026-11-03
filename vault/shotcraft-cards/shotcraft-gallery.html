@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMG Shotcraft Studio Gallery — معمل معاينة اللقطات السينمائية</title>
+  <link rel="stylesheet" href="../../core/amg-tokens.css">
+  <link rel="stylesheet" href="../../core/amg-stage.css">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --sidebar-bg: #0b0f19;
+      --panel-border: rgba(255, 255, 255, 0.1);
+      --accent-cyan: #38bdf8;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-dark);
+      color: #f8fafc;
+      font-family: var(--amg-font-arabic), system-ui, sans-serif;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* القائمة الجانبية للقطات */
+    .gallery-sidebar {
+      width: 380px;
+      background: var(--sidebar-bg);
+      border-left: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      z-index: 20;
+    }
+    .sidebar-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .sidebar-header h1 {
+      font-size: 20px;
+      margin: 0 0 6px 0;
+      color: #fff;
+    }
+    .sidebar-header p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin: 0;
+    }
+    .shot-list {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .shot-card-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      text-align: right;
+      transition: all 0.2s ease;
+      color: #fff;
+    }
+    .shot-card-btn:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .shot-card-btn.active {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: var(--accent-cyan);
+    }
+    .shot-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .shot-id-badge {
+      font-family: var(--amg-font-mono);
+      font-size: 12px;
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--accent-cyan);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .shot-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .shot-vibe {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    /* منطقة العرض الرئيسية */
+    .gallery-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(ellipse at center, #0e1526 0%, #07090e 70%);
+      padding: 20px;
+    }
+    .stage-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9), 0 0 60px rgba(56, 189, 248, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* شريط التحكم بالتايم لاين */
+    .gallery-hud {
+      position: absolute;
+      bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--panel-border);
+      border-radius: 30px;
+      padding: 10px 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 30;
+    }
+    .hud-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--panel-border);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    .hud-btn:hover {
+      background: var(--accent-cyan);
+      color: #020306;
+    }
+    .time-readout {
+      font-family: var(--amg-font-mono);
+      font-size: 14px;
+      color: var(--accent-cyan);
+      min-width: 90px;
+      text-align: center;
+    }
+    .time-slider {
+      width: 280px;
+      accent-color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- القائمة الجانبية -->
+  <aside class="gallery-sidebar">
+    <div class="sidebar-header">
+      <h1>معمل Shotcraft السينمائي</h1>
+      <p>17 وصفة تنفيذية حية عبر عائلات الإخراج العشر</p>
+    </div>
+    <div class="shot-list" id="shot-list"></div>
+  </aside>
+
+  <!-- مسرح العرض -->
+  <main class="gallery-main">
+    <div class="stage-wrapper">
+      <div id="amg-stage" class="amg-stage amg-crisp-stroke" data-aspect="16:9">
+        <div id="amg-camera-rig" class="amg-camera-rig">
+          <div id="shot-container" style="width:100%;height:100%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- شريط التحكم -->
+    <div class="gallery-hud">
+      <button class="hud-btn" id="btn-toggle">تشغيل ▶</button>
+      <button class="hud-btn" id="btn-restart">إعادة ↺</button>
+      <input type="range" class="time-slider" id="time-slider" min="0" max="4000" value="0">
+      <div class="time-readout" id="time-readout">0.00s / 4.00s</div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { AMG_SHOTCRAFT_REGISTRY, AMGShotcraftEngine } from '../../core/amg-shotcraft-engine.js';
+    import { AMGClock } from '../../core/amg-clock.js';
+    import { AMGCameraRig } from '../../core/amg-camera.js';
+
+    let currentShotId = 'SC-001';
+    let clock = null;
+    let camera = null;
+    let currentTimeline = null;
+
+    const listContainer = document.getElementById('shot-list');
+    const shotContainer = document.getElementById('shot-container');
+    const timeSlider = document.getElementById('time-slider');
+    const timeReadout = document.getElementById('time-readout');
+    const btnToggle = document.getElementById('btn-toggle');
+    const btnRestart = document.getElementById('btn-restart');
+
+    // 1. توليد قائمة اللقطات
+    const allShots = Object.values(AMG_SHOTCRAFT_REGISTRY);
+    allShots.forEach(shot => {
+      const btn = document.createElement('button');
+      btn.className = `shot-card-btn ${shot.id === currentShotId ? 'active' : ''}`;
+      btn.dataset.id = shot.id;
+      btn.innerHTML = `
+        <div class="shot-card-header">
+          <span class="shot-name">${shot.name}</span>
+          <span class="shot-id-badge">${shot.id}</span>
+        </div>
+        <div class="shot-vibe">${shot.vibe}</div>
+      `;
+      btn.onclick = () => selectShot(shot.id);
+      listContainer.appendChild(btn);
+    });
+
+    // 2. تحميل اللقطة وتشغيلها
+    function selectShot(shotId) {
+      currentShotId = shotId;
+      document.querySelectorAll('.shot-card-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.id === shotId);
+      });
+
+      const recipe = AMGShotcraftEngine.get(shotId);
+      if (!recipe) return;
+
+      const durationMs = recipe.defaultDurationMs || 3500;
+      timeSlider.max = durationMs;
+      timeSlider.value = 0;
+
+      // إعادة تهيئة الساعة والكاميرا
+      if (clock) clock.pause();
+      clock = new AMGClock({ durationMs, fps: 60 });
+      camera = new AMGCameraRig('#amg-camera-rig', clock);
+      currentTimeline = clock.masterTimeline;
+
+      // تفريغ الحاوية وتثبيت اللقطة
+      shotContainer.innerHTML = '';
+      AMGShotcraftEngine.mountAndAnimate(shotContainer, currentTimeline, shotId, { camera, start: 0 });
+
+      // ربط التايم لاين بشريط السحب
+      clock.onTick((timeMs, progress) => {
+        timeSlider.value = timeMs;
+        timeReadout.textContent = `${(timeMs / 1000).toFixed(2)}s / ${(durationMs / 1000).toFixed(2)}s`;
+      });
+
+      clock.play();
+      btnToggle.textContent = 'إيقاف ⏸';
+    }
+
+    btnToggle.onclick = () => {
+      if (!clock) return;
+      if (clock.isPlaying) {
+        clock.pause();
+        btnToggle.textContent = 'تشغيل ▶';
+      } else {
+        clock.play();
+        btnToggle.textContent = 'إيقاف ⏸';
+      }
+    };
+
+    btnRestart.onclick = () => {
+      if (!clock) return;
+      clock.seek(0);
+      clock.play();
+      btnToggle.textContent = 'إيقاف ⏸';
+    };
+
+    timeSlider.oninput = (e) => {
+      if (!clock) return;
+      clock.seek(Number(e.target.value) / 1000);
+      btnToggle.textContent = 'تشغيل ▶';
+    };
+
+    // البدء باللقطة الأولى
+    selectShot('SC-001');
+  </script>
+</body>
+</html>
