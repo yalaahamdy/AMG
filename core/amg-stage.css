@@ -67,7 +67,7 @@ html, body {
   pointer-events: auto;
 }
 
-/* طبقات العمق البصرية (Multi-Plane Parallax Stacks) */
+/* طبقات العمق البصرية السينمائية الخمس (The 5-Plane Parallax Stack) */
 .amg-layer {
   position: absolute;
   top: 0;
@@ -75,22 +75,29 @@ html, body {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
 }
 
-.amg-layer[data-depth="background"] {
+.amg-layer[data-depth="deep"], [data-depth="deep"] {
+  z-index: 5;
+}
+
+.amg-layer[data-depth="bg"], [data-depth="bg"], .amg-layer[data-depth="background"] {
   z-index: 10;
 }
 
-.amg-layer[data-depth="midground"] {
+.amg-layer[data-depth="main"], [data-depth="main"], .amg-layer[data-depth="midground"] {
   z-index: 20;
 }
 
-.amg-layer[data-depth="foreground"] {
+.amg-layer[data-depth="fore"], [data-depth="fore"], .amg-layer[data-depth="foreground"] {
   z-index: 30;
 }
 
-.amg-layer[data-depth="hud"] {
-  z-index: 40;
+.amg-layer[data-depth="hud"], [data-depth="hud"] {
+  z-index: 50;
+  pointer-events: auto;
 }
 
 /* شبكات القياس الخلفية التحريرية */

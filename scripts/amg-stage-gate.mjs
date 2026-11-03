@@ -49,6 +49,16 @@ if (stageNum === 1) {
           passed = false;
           errors.push(`تكرار لنفس بطاقة اللقطة في مشهدين متتاليين (${script.scenes[i].shotcraftCardId}). خرق لقانون التنوع الحركي!`);
         }
+        // فحص زوايا الكاميرا المفرطة (تجنب الدوران الحاد أكثر من 65 درجة)
+        const cam = script.scenes[i].cameraRig;
+        if (cam && cam.target) {
+          const rotZ = Math.abs(cam.target.rotateZ || 0);
+          const pitch = Math.abs(cam.target.pitch || cam.target.isoTilt || 0);
+          if (rotZ > 65 || pitch > 65) {
+            passed = false;
+            errors.push(`المشهد ${script.scenes[i].sceneId}: زاوية دوران الكاميرا مفرطة (${Math.max(rotZ, pitch)} درجة). الحد الأقصى المسموح لمنع تشوه النصوص هو 65 درجة.`);
+          }
+        }
       }
     } catch (e) {
       passed = false;
