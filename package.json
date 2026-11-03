@@ -11,11 +11,13 @@
     "stage-gate": "node scripts/amg-stage-gate.mjs",
     "vision-audit": "node scripts/amg-vision-audit.mjs",
     "ponytail-audit": "node scripts/amg-ponytail-audit.mjs",
+    "critic": "node scripts/amg-critic.mjs",
     "verify-dom": "node scripts/amg-verify-dom.mjs",
     "verify-shotcraft": "node scripts/amg-shotcraft-verify.mjs",
     "verify-diagrams": "node scripts/amg-diagram-verify.mjs",
     "verify-studio": "node scripts/amg-studio-verify.mjs",
     "verify-ponytail": "node scripts/amg-ponytail-verify.mjs",
+    "verify-all": "npm run verify-shotcraft && npm run verify-diagrams && npm run verify-studio && npm run verify-ponytail && npm run critic",
     "bundle": "node scripts/amg-bundle-master.mjs",
     "satori": "node scripts/amg-satori-compile.mjs"
   },
