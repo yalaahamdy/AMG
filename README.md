@@ -34,6 +34,7 @@
 | **المرحلة 8** | **استوديو NullMotion Pro ومسجل WebCodecs** (تسجيل 60fps داخلي) | `core/amg-nullmotion-hud-pro.js` | `npm run verify-studio` |
 | **المرحلة 9** | **درع Ponytail لمكافحة التضخم وضغط الشفرة** (`Anti-Bloat Guard`) | `core/amg-ponytail-optimizer.js` | `npm run ponytail-audit` |
 | **المرحلة 10** | **خط إنتاج الوكلاء الذاتيين والناقد المستقل** (`Multi-Agent Pipeline`) | `scripts/amg-critic.mjs` | `npm run critic` |
+| **المرحلة الشاملة** | **البوابة المركزية التفاعلية ومحور الأوامر الشامل** (`Grand Synthesis Hub`) | `index.html` + `scripts/amg-cli.mjs` | `npm run grand-verify` |
 
 ---
 
@@ -118,7 +119,13 @@ npm start
 تم تزويد المستودع بترسانة أوامر فحص شاملة:
 
 ```bash
-# تشغيل كافة اختبارات التحقق دفعة واحدة (100% Pass)
+# 1. تشغيل الفحص الشامل الموحد للمنظومة التتويجية (30/30 اختباراً بنسبة 100%)
+npm run grand-verify
+
+# 2. تشغيل محور سطر الأوامر الموحد AMG CLI
+node scripts/amg-cli.mjs help
+
+# 3. تشغيل كافة اختبارات التحقق الأساسية دفعة واحدة
 npm run verify-all
 
 # تقييم المشروع بواسطة الناقد المستقل وإصدار تقرير critic_report.md

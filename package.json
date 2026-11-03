@@ -12,6 +12,8 @@
     "vision-audit": "node scripts/amg-vision-audit.mjs",
     "ponytail-audit": "node scripts/amg-ponytail-audit.mjs",
     "critic": "node scripts/amg-critic.mjs",
+    "grand-verify": "node scripts/amg-grand-verify.mjs",
+    "amg": "node scripts/amg-cli.mjs",
     "verify-dom": "node scripts/amg-verify-dom.mjs",
     "verify-shotcraft": "node scripts/amg-shotcraft-verify.mjs",
     "verify-diagrams": "node scripts/amg-diagram-verify.mjs",
