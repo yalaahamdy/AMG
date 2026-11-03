@@ -27,17 +27,24 @@ if (type === 'icon') {
   });
   console.log(`[AMG Query] نتائج البحث عن أيقونات (${keyword}):`);
   console.log(JSON.stringify(matches, null, 2));
-} else if (type === 'shot') {
+} else if (type === 'shot' || type === 'recipe') {
   const data = JSON.parse(fs.readFileSync(path.join(catalogDir, 'shots-index.json'), 'utf-8'));
   const matches = [];
+  const executableShots = ['SC-001', 'SC-047', 'SC-076', 'SC-137'];
+
   data.families.forEach(family => {
     family.featured.forEach(shot => {
       if (shot.name.toLowerCase().includes(normKeyword) || shot.vibe.includes(normKeyword) || shot.id.toLowerCase().includes(normKeyword)) {
-        matches.push({ family: family.name, ...shot });
+        const isExec = executableShots.includes(shot.id);
+        const matchObj = { family: family.name, ...shot, hasExecutableRecipe: isExec };
+        if (isExec) {
+          matchObj.importSnippet = `import { AMGShotcraftEngine } from './core/amg-runtime.js';\nAMGShotcraftEngine.mountAndAnimate(stageEl, timeline, '${shot.id}', { camera, start: 0 });`;
+        }
+        matches.push(matchObj);
       }
     });
   });
-  console.log(`[AMG Query] نتائج البحث عن بطاقات اللقطات (${keyword}):`);
+  console.log(`[AMG Query] نتائج البحث عن بطاقات اللقطات والوصفات البرمجية (${keyword}):`);
   console.log(JSON.stringify(matches, null, 2));
 } else if (type === 'diagram') {
   const data = JSON.parse(fs.readFileSync(path.join(catalogDir, 'diagrams-index.json'), 'utf-8'));
