@@ -20,6 +20,7 @@ export { AMGVisionGuard } from './amg-vision-guard.js';
 export { AMGNullMotionHUD } from './amg-nullmotion-hud.js';
 export { AMGNullMotionHUDPro } from './amg-nullmotion-hud-pro.js';
 export { AMGWebCodecsRecorder } from './amg-webcodecs-recorder.js';
+export { AMGPonytailOptimizer } from './amg-ponytail-optimizer.js';
 
 /**
  * دالة التهيئة السريعة لمشهد كامل بسطر واحد (نمط Ponytail)

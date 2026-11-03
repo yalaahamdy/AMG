@@ -10,10 +10,12 @@
     "query": "node scripts/amg-query.mjs",
     "stage-gate": "node scripts/amg-stage-gate.mjs",
     "vision-audit": "node scripts/amg-vision-audit.mjs",
+    "ponytail-audit": "node scripts/amg-ponytail-audit.mjs",
     "verify-dom": "node scripts/amg-verify-dom.mjs",
     "verify-shotcraft": "node scripts/amg-shotcraft-verify.mjs",
     "verify-diagrams": "node scripts/amg-diagram-verify.mjs",
     "verify-studio": "node scripts/amg-studio-verify.mjs",
+    "verify-ponytail": "node scripts/amg-ponytail-verify.mjs",
     "bundle": "node scripts/amg-bundle-master.mjs",
     "satori": "node scripts/amg-satori-compile.mjs"
   },

@@ -5,6 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { AMGPonytailOptimizer } from '../core/amg-ponytail-optimizer.js';
 
 const [projectSlug, stageNumStr] = process.argv.slice(2);
 if (!projectSlug || !stageNumStr) {
@@ -91,6 +92,13 @@ if (stageNum === 1) {
         passed = false;
         errors.push(`الملف ${f}: عنصر SVG يفتقر إلى سمة viewBox صالحة.`);
       }
+
+      // فحص درع Ponytail للرشاقة البرمجية وعمق DOM
+      const pReport = AMGPonytailOptimizer.analyzeSceneHTML(content);
+      if (pReport.maxDepth > 5) {
+        passed = false;
+        errors.push(`الملف ${f}: عمق شجرة DOM (${pReport.maxDepth}) يتجاوز الحد الأقصى المسموح به في دستور AGENTS.md (عمق <= 5). قم بتبسيط التداخل.`);
+      }
     });
   }
 } else if (stageNum === 6) {
@@ -123,6 +131,13 @@ if (stageNum === 1) {
             passed = false;
             errors.push(`الملف ${f}: تم رصد تفكيك حروف عربية فردية داخل وسوم amg-char! هذا خرق لدستور AGENTS.md.`);
           }
+        }
+
+        // فحص درع Ponytail للرشاقة البرمجية وعمق DOM
+        const pReport = AMGPonytailOptimizer.analyzeSceneHTML(content);
+        if (pReport.maxDepth > 5) {
+          passed = false;
+          errors.push(`الملف ${f}: عمق شجرة DOM (${pReport.maxDepth}) يتجاوز الحد الأقصى المسموح به في دستور AGENTS.md (عمق <= 5). قم بتبسيط التداخل.`);
         }
       });
     }
