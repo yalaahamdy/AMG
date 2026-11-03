@@ -1,0 +1,63 @@
+{
+  "projectSlug": "machine-language",
+  "trackId": "03-isometric-system-anatomy",
+  "resolution": { "width": 1920, "height": 1080, "fps": 60 },
+  "totalDurationMs": 15000,
+  "seed": 99101,
+  "scenes": [
+    {
+      "sceneId": "scene-01",
+      "title": "وهم لغات البرمجة وتفكك التجريد",
+      "startMs": 0,
+      "endMs": 3800,
+      "shotcraftCardId": "SC-005",
+      "cameraRig": {
+        "initial": { "x": 0, "y": 0, "scale": 1.0, "rotateZ": 0 },
+        "target": { "x": 0, "y": 0, "scale": 1.45, "rotateZ": -1.8 },
+        "ease": "inOutCubic"
+      },
+      "morphBridgeToNext": {
+        "type": "svg-morph-and-iso-tilt",
+        "sourceElementId": "#s01-code-window",
+        "targetElementId": "#s02-iso-base-platform",
+        "transitionDurationMs": 550
+      }
+    },
+    {
+      "sceneId": "scene-02",
+      "title": "تشريح السيليكون وسريان نبضات الصفر والواحد",
+      "startMs": 3800,
+      "endMs": 10500,
+      "shotcraftCardId": "SC-062",
+      "cameraRig": {
+        "initial": { "scale": 1.1, "isoTiltX": 55, "isoRotateZ": -45 },
+        "target": { "scale": 1.0, "isoTiltX": 55, "isoRotateZ": -45 },
+        "ease": "outExpo"
+      },
+      "morphBridgeToNext": {
+        "type": "energy-beam-convergence",
+        "sourceElementId": "#s02-alu-core",
+        "targetElementId": "#s03-hero-chip",
+        "transitionDurationMs": 650
+      }
+    },
+    {
+      "sceneId": "scene-03",
+      "title": "لغة الآلة: الصوت الوحيد الذي يفهمه السيليكون",
+      "startMs": 10500,
+      "endMs": 15000,
+      "shotcraftCardId": "SC-136",
+      "cameraRig": {
+        "initial": { "scale": 1.18, "rotateZ": 1.2 },
+        "target": { "scale": 1.0, "rotateZ": 0 },
+        "ease": "outBack"
+      },
+      "morphBridgeToNext": {
+        "type": "final-hold",
+        "sourceElementId": "#s03-hero-chip",
+        "targetElementId": "#s03-hero-chip",
+        "transitionDurationMs": 0
+      }
+    }
+  ]
+}

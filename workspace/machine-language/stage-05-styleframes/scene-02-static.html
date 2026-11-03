@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Language: Scene 02 Static Styleframe (Stage 5)</title>
+  <link rel="stylesheet" href="../../../core/amg-tokens.css">
+  <link rel="stylesheet" href="../../../core/amg-stage.css">
+  <style>
+    @scope (#s02-static-root) {
+      .scene-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 1460px;
+        height: 640px;
+      }
+      .info-column {
+        width: 480px;
+      }
+      .iso-canvas {
+        width: 880px;
+        height: 580px;
+        position: relative;
+        perspective: 1200px;
+      }
+      .iso-rig {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform: rotateX(55deg) rotateZ(-45deg);
+        transform-style: preserve-3d;
+      }
+      .iso-layer-card {
+        position: absolute;
+        width: 440px;
+        height: 440px;
+        left: 200px;
+        top: 60px;
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+      .layer-bottom {
+        background: #090e17;
+        border: 2px solid #1e293b;
+        transform: translateZ(0px);
+      }
+      .layer-middle {
+        background: rgba(15, 23, 42, 0.85);
+        border: 2px solid #38bdf8;
+        transform: translateZ(100px);
+      }
+      .layer-top {
+        background: rgba(30, 41, 59, 0.8);
+        border: 2px solid #f59e0b;
+        transform: translateZ(200px);
+      }
+      .layer-label {
+        font-family: var(--amg-font-arabic);
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+    }
+  </style>
+</head>
+<body class="amg-body">
+  <div id="amg-stage" class="amg-stage amg-crisp-stroke" data-aspect="16:9">
+    <div id="amg-camera-rig" class="amg-camera-rig">
+      <section id="s02-static-root" class="amg-scene">
+        <div class="scene-container">
+          <div class="info-column">
+            <span style="display:inline-block; padding:4px 14px; border-radius:12px; background:rgba(245,158,11,0.15); color:#f59e0b; font-size:14px; font-weight:700; margin-bottom:16px;">
+              التشريح الإيزومتري للمعالج
+            </span>
+            <h2 style="font-family:var(--amg-font-arabic); font-size:58px; color:#ffffff; line-height:1.2; margin:0 0 20px 0;">
+              لغة الآلة: نبضات الجهد والسيليكون
+            </h2>
+            <p style="font-family:var(--amg-font-arabic); font-size:20px; color:#94a3b8; line-height:1.6; margin:0 0 32px 0;">
+              لا توجد حروف ولا كلمات داخل المعالج. كل ما تراه هو جهد كهربي عالي (+5V يمثل 1) أو منخفض (0V يمثل 0) يفتح ويغلق مليارات الترانزستورات في الثانية.
+            </p>
+            <div style="font-family:var(--amg-font-mono); font-size:16px; color:#38bdf8;">
+              ALU: ADD R1, R2 → [01001000] EXECUTED
+            </div>
+          </div>
+
+          <div class="iso-canvas">
+            <div class="iso-rig">
+              <!-- Layer 1: Silicon & Transistor Grid -->
+              <div class="iso-layer-card layer-bottom">
+                <span class="layer-label" style="color:#64748b;">1. طبقة السيليكون والترانزستورات (Silicon Substrate)</span>
+                <!-- Silicon mesh representation -->
+                <svg width="100%" height="280" viewBox="0 0 380 280">
+                  <path d="M 20 20 H 360 M 20 60 H 360 M 20 100 H 360 M 20 140 H 360 M 20 180 H 360 M 20 220 H 360" stroke="#1e293b" stroke-width="2"/>
+                  <path d="M 60 20 V 260 M 120 20 V 260 M 180 20 V 260 M 240 20 V 260 M 300 20 V 260" stroke="#1e293b" stroke-width="2"/>
+                </svg>
+              </div>
+
+              <!-- Layer 2: ALU & Registers -->
+              <div class="iso-layer-card layer-middle">
+                <span class="layer-label" style="color:#38bdf8;">2. وحدة الحساب والمنطق والسجلات (ALU & Registers)</span>
+                <div style="display:flex; justify-content:space-around; align-items:center; height:240px;">
+                  <div style="padding:16px; background:#0f172a; border:1px solid #38bdf8; border-radius:12px; text-align:center;">
+                    <span style="font-size:14px; color:#94a3b8;">REG A</span><br>
+                    <b style="font-size:20px; color:#fff; font-family:var(--amg-font-mono);">01001000</b>
+                  </div>
+                  <div style="font-size:28px; color:#38bdf8;">+</div>
+                  <div style="padding:16px; background:#0f172a; border:1px solid #38bdf8; border-radius:12px; text-align:center;">
+                    <span style="font-size:14px; color:#94a3b8;">REG B</span><br>
+                    <b style="font-size:20px; color:#fff; font-family:var(--amg-font-mono);">00000001</b>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Layer 3: Logic Gates (AND, OR, NOT) -->
+              <div class="iso-layer-card layer-top">
+                <span class="layer-label" style="color:#f59e0b;">3. مصفوفة البوابات المنطقية (Logic Gates)</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; height:240px; padding:0 20px;">
+                  <span style="padding:10px 20px; border:2px solid #f59e0b; border-radius:8px; font-weight:bold; color:#fff;">AND</span>
+                  <span style="padding:10px 20px; border:2px solid #f59e0b; border-radius:8px; font-weight:bold; color:#fff;">OR</span>
+                  <span style="padding:10px 20px; border:2px solid #f59e0b; border-radius:8px; font-weight:bold; color:#fff;">NOT</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- المرحلة 5: صفر كود تحريك! تم التحقق التام من ثبات الطبقات الإيزومترية -->
+</body>
+</html>

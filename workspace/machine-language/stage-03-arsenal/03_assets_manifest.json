@@ -1,0 +1,17 @@
+{
+  "projectSlug": "machine-language",
+  "iconsUsed": [
+    { "id": "icon-cpu", "source": "lucide", "selector": "#s03-cpu-icon" },
+    { "id": "icon-terminal", "source": "lucide", "selector": "#s01-term-icon" },
+    { "id": "icon-server", "source": "lucide", "selector": "#s02-server-icon" }
+  ],
+  "customSiliconPatterns": [
+    { "id": "silicon-circuit-pattern", "type": "svg-pattern" },
+    { "id": "binary-stream-svg", "type": "svg-stream" }
+  ],
+  "isometricLayers": [
+    { "layerId": "iso-layer-transistors", "depth": "bottom", "label": "طبقة السيليكون والترانزستورات" },
+    { "layerId": "iso-layer-alu", "depth": "middle", "label": "وحدة الحساب والمنطق وسجلات الذاكرة (ALU & Registers)" },
+    { "layerId": "iso-layer-logic-gates", "depth": "top", "label": "مصفوفة البوابات المنطقية (Logic Gates)" }
+  ]
+}

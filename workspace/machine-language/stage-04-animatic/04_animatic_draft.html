@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Language: Animatic Draft (Stage 4)</title>
+  <link rel="stylesheet" href="../../../core/amg-tokens.css">
+  <link rel="stylesheet" href="../../../core/amg-stage.css">
+  <style>
+    .draft-box {
+      border: 2px dashed rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 48px;
+      border-radius: 20px;
+      text-align: center;
+      width: 1000px;
+    }
+    .draft-tag {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 12px;
+      background: #38bdf8;
+      color: #06080e;
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="amg-body">
+  <div id="amg-stage" class="amg-stage" data-aspect="16:9">
+    <div id="amg-camera-rig" class="amg-camera-rig">
+      
+      <!-- Scene 01 Draft (0s - 3.8s) -->
+      <section id="draft-s01" class="amg-scene">
+        <div class="draft-box">
+          <span class="draft-tag">SC-005 DIVE (0.0s - 3.8s)</span>
+          <h1 style="font-size: 52px; margin: 0 0 16px 0;">[نافذة كود بشري: print('Hello World') يتفكك إلى 01001000]</h1>
+          <p style="color: #94a3b8; font-size: 22px;">تقترب الكاميرا الماكرو وتخترق سطح الحروف نحو الأصفار والآحاد</p>
+        </div>
+      </section>
+
+      <!-- Scene 02 Draft (3.8s - 10.5s) -->
+      <section id="draft-s02" class="amg-scene" style="opacity: 0;">
+        <div class="draft-box" style="border-color:#38bdf8;">
+          <span class="draft-tag" style="background:#f59e0b; color:#06080e;">SC-062 ISOMETRIC EXPLODE (3.8s - 10.5s)</span>
+          <h1 style="font-size: 52px; margin: 0 0 16px 0;">[تشريح السيليكون الإيزومتري: 3 طبقات تتفكك في الفضاء]</h1>
+          <p style="color: #94a3b8; font-size: 22px;">سريان نبضات الجهد الكهربائي عبر البوابات وسجلات الذاكرة</p>
+        </div>
+      </section>
+
+      <!-- Scene 03 Draft (10.5s - 15.0s) -->
+      <section id="draft-s03" class="amg-scene" style="opacity: 0;">
+        <div class="draft-box" style="border-color:#10b981;">
+          <span class="draft-tag" style="background:#10b981; color:#06080e;">SC-136 LOCKUP OUTRO (10.5s - 15.0s)</span>
+          <h1 style="font-size: 56px; margin: 0 0 16px 0;">[شعار المعالج + لغة الآلة: الصوت الوحيد للسيليكون]</h1>
+          <p style="color: #94a3b8; font-size: 22px;">ارتداد كاميرا سينمائي مع استقرار عداد التردد 4.20 GHz</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { initAMGStage } from '../../../core/amg-runtime.js';
+    const { clock, camera, hud, timeline } = initAMGStage({ durationMs: 15000, fps: 60 });
+
+    // Scene 1: 0s - 3800ms
+    camera.keyframe(timeline, { scale: 1.35, rotateZ: -1.5, duration: 3800, ease: 'inOutCubic', start: 0 });
+
+    // Transition 1 -> 2 at 3800ms
+    timeline.add('#draft-s01', { opacity: [1, 0], duration: 300 }, 3600);
+    timeline.add('#draft-s02', { opacity: [0, 1], duration: 400 }, 3800);
+    camera.keyframe(timeline, { scale: 1.0, isoTiltX: 55, isoRotateZ: -45, duration: 6000, ease: 'outExpo', start: 3800 });
+
+    // Transition 2 -> 3 at 10500ms
+    timeline.add('#draft-s02', { opacity: [1, 0], duration: 350 }, 10300);
+    timeline.add('#draft-s03', { opacity: [0, 1], duration: 400 }, 10500);
+    camera.keyframe(timeline, { scale: 1.0, isoTiltX: 0, isoRotateZ: 0, rotateZ: 0, duration: 1200, ease: 'outBack', start: 10500 });
+  </script>
+</body>
+</html>
