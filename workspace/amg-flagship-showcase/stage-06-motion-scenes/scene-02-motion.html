@@ -72,33 +72,33 @@
   </div>
 
   <script type="module">
-    import { initAMGStage, drawSVG, prepareKineticText, animateKineticReveal, registerAmbientAliveLoop } from '../../../core/amg-runtime.js';
+    import { initAMGStage, drawSVG, prepareKineticText, animateKineticReveal, registerAmbientAliveLoop, AMG_STUDIO_EASES, AMG_SPRINGS } from '../../../core/amg-runtime.js';
 
     const { clock, camera, hud, timeline } = initAMGStage({ durationMs: 4500, fps: 60 });
     registerAmbientAliveLoop(clock, '#amg-stage');
 
-    // SC-032 Whip Pan & Reveal Camera Move
-    camera.keyframe(timeline, { x: 0, scale: 1.0, duration: 800, ease: 'outExpo', start: 0 });
+    // SC-032 Whip Pan & Reveal Camera Move (Studio Dramatic In-Out)
+    camera.keyframe(timeline, { x: 0, scale: 1.0, duration: 800, ease: AMG_STUDIO_EASES.dramaticInOut, start: 0 });
 
-    // 1. دخول النصوص
+    // 1. دخول النصوص بـ Snappy Out
     timeline.add('#s02-text-col', {
       opacity: [0, 1],
       translateX: [30, 0],
       duration: 600,
-      ease: 'outExpo'
+      ease: AMG_STUDIO_EASES.snappyOut
     }, 150);
 
-    // 2. صعود بطاقة الواجهة
+    // 2. صعود بطاقة الواجهة بنابض فيزيائي معتدل الكتلة (Gentle Spring)
     timeline.add('#s02-visual-col', {
       opacity: [0, 1],
       scale: [0.94, 1.0],
-      duration: 700,
-      ease: 'outBack'
+      duration: 750,
+      ease: AMG_SPRINGS.gentle
     }, 200);
 
     // 3. رسم منحنى D3 البياني
-    drawSVG(timeline, '#s02-chart-curve', { start: 400, duration: 1100, ease: 'inOutCubic' });
-    timeline.add('#s02-chart-dot', { opacity: [0, 1], scale: [0, 1], duration: 400, ease: 'outBack' }, 1400);
+    drawSVG(timeline, '#s02-chart-curve', { start: 400, duration: 1100, ease: AMG_STUDIO_EASES.snappyOut });
+    timeline.add('#s02-chart-dot', { opacity: [0, 1], scale: [0, 1], duration: 400, ease: AMG_STUDIO_EASES.overshoot }, 1400);
 
     // 4. عداد الإحصائية المتسارع
     const statEl = document.querySelector('#s02-metric-stat');
@@ -106,7 +106,7 @@
     timeline.add(proxy, {
       val: 99.98,
       duration: 1400,
-      ease: 'outExpo',
+      ease: AMG_STUDIO_EASES.snappyOut,
       onUpdate: () => {
         statEl.textContent = `${proxy.val.toFixed(2)}%`;
       }

@@ -9,6 +9,7 @@ export * from './amg-svg-utils.js';
 export * from './amg-d3-bridge.js';
 export * from './amg-text-engine.js';
 export * from './amg-physics-rules.js';
+export * from './amg-studio-physics.js';
 export { AMGVisionGuard } from './amg-vision-guard.js';
 export { AMGNullMotionHUD } from './amg-nullmotion-hud.js';
 

@@ -93,44 +93,44 @@
   </div>
 
   <script type="module">
-    import { initAMGStage, drawSVG, prepareKineticText, animateKineticReveal, registerAmbientAliveLoop } from '../../../core/amg-runtime.js';
+    import { initAMGStage, drawSVG, prepareKineticText, animateKineticReveal, registerAmbientAliveLoop, AMG_STUDIO_EASES, AMG_SPRINGS } from '../../../core/amg-runtime.js';
 
     const { clock, camera, hud, timeline } = initAMGStage({ durationMs: 4000, fps: 60 });
     registerAmbientAliveLoop(clock, '#amg-stage');
 
-    // SC-001 Kinetic Slam Camera Move
-    camera.keyframe(timeline, { scale: 1.0, rotateZ: 0, duration: 600, ease: 'outExpo', start: 0 });
+    // SC-001 Kinetic Slam Camera Move (Studio Snappy Out)
+    camera.keyframe(timeline, { scale: 1.0, rotateZ: 0, duration: 600, ease: AMG_STUDIO_EASES.snappyOut, start: 0 });
     camera.impulse(timeline, 0.4, 250, 450);
 
-    // 1. الشارة العلوية
+    // 1. الشارة العلوية بنابض رشيق
     timeline.add('#s01-badge', {
       opacity: [0, 1],
       translateY: [-20, 0],
       duration: 500,
-      ease: 'outExpo'
+      ease: AMG_SPRINGS.snappy
     }, 100);
 
     // 2. العنوان العربي الحركي
     const titleUnits = prepareKineticText('#s01-title', { mode: 'words' });
-    animateKineticReveal(timeline, titleUnits, { start: 200, duration: 800, staggerMs: 80, ease: 'outExpo' });
+    animateKineticReveal(timeline, titleUnits, { start: 200, duration: 800, staggerMs: 80, ease: AMG_STUDIO_EASES.snappyOut });
 
     // 3. النص الفرعي
     timeline.add('#s01-sub', {
       opacity: [0, 1],
       translateY: [15, 0],
       duration: 600,
-      ease: 'outQuad'
+      ease: AMG_STUDIO_EASES.cinematicSlowMo
     }, 500);
 
-    // 4. رسم أيقونة السحابة خطاً بخط
+    // 4. ظهور أيقونة السحابة مع التجاوز والاستقرار (Overshoot)
     timeline.add('#s01-icon-box', {
       opacity: [0, 1],
       scale: [0.8, 1.0],
-      duration: 600,
-      ease: 'outBack'
+      duration: 650,
+      ease: AMG_STUDIO_EASES.overshoot
     }, 400);
 
-    drawSVG(timeline, '#s01-hero-cloud', { start: 500, duration: 1000, ease: 'inOutQuad' });
+    drawSVG(timeline, '#s01-hero-cloud', { start: 500, duration: 1000, ease: AMG_STUDIO_EASES.snappyOut });
 
     // لقطة تسليم الحالة (Exit State Snapshot)
     window.AMG_SCENE_01_EXIT = {

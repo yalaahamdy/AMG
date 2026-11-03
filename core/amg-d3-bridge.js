@@ -2,7 +2,7 @@
  * AMG D3 Bridge & Deterministic Mathematical Animator
  * The Ultimate Pure-HTML Motion Graphics AI Ecosystem
  */
-import * as d3 from './vendor/d3.mjs';
+import d3, { scaleLinear, line, curveCatmullRom, interpolate } from './vendor/d3.esm.js';
 
 /**
  * تحريك حالة بيانية لـ D3 من حالة أولى لحالة ثانية بشكل حتمي تماماً
@@ -15,7 +15,8 @@ export function animateD3State(timeline, {
   ease = 'inOutCubic',
   onUpdateRender
 }) {
-  const interpolator = d3.interpolate(fromData, toData);
+  const interp = interpolate || d3.interpolate;
+  const interpolator = interp(fromData, toData);
   const proxy = { progress: 0 };
 
   timeline.add(proxy, {
@@ -40,11 +41,12 @@ export function createChartScales({
   height = 600,
   padding = { top: 40, right: 40, bottom: 60, left: 80 }
 } = {}) {
-  const xScale = d3.scaleLinear()
+  const sLinear = scaleLinear || d3.scaleLinear;
+  const xScale = sLinear()
     .domain(xDomain)
     .range([padding.left, width - padding.right]);
 
-  const yScale = d3.scaleLinear()
+  const yScale = sLinear()
     .domain(yDomain)
     .range([height - padding.bottom, padding.top]);
 
@@ -55,10 +57,12 @@ export function createChartScales({
  * توليد مسار منحنى بياني ناعم
  */
 export function generateCurvedPath(data, xScale, yScale) {
-  const lineGen = d3.line()
+  const lineGenerator = line || d3.line;
+  const curveMethod = (curveCatmullRom || d3.curveCatmullRom).alpha(0.5);
+  const lineGen = lineGenerator()
     .x(d => xScale(d.x))
     .y(d => yScale(d.y))
-    .curve(d3.curveCatmullRom.alpha(0.5));
+    .curve(curveMethod);
 
   return lineGen(data);
 }

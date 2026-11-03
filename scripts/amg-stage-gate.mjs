@@ -85,6 +85,15 @@ if (stageNum === 1) {
     if (files.length === 0) {
       passed = false;
       errors.push('لا توجد ملفات مشاهد محركة في stage-06-motion-scenes/.');
+    } else {
+      // فحص حظر المنحنيات البدائية (Banned Generic Eases Gate)
+      files.forEach(f => {
+        const content = fs.readFileSync(path.join(motionDir, f), 'utf-8');
+        if (content.includes("ease: 'linear'") || content.includes('ease: "linear"')) {
+          passed = false;
+          errors.push(`الملف ${f} يستخدم منحنى حركي خطي جامد (ease: 'linear'). يُحظر استخدام المنحنيات الخطية على العناصر الرئيسية؛ استخدم منحنيات AMG_STUDIO_EASES أو نوابض AMG_SPRINGS.`);
+        }
+      });
     }
   }
 }
