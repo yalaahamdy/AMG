@@ -141,12 +141,14 @@
     }
 
     keyframe(timeline, {
-      x, y, scale, rotateZ, isoTiltX, isoRotateZ, shakeIntensity, dofBlurPx,
+      x, y, translateX, translateY, scale, rotateZ, isoTiltX, isoRotateZ, shakeIntensity, dofBlurPx,
       start = 0, duration = 1000, ease = 'inOutCubic'
     }) {
       const animProps = { duration, ease };
-      if (x !== undefined) animProps.x = x;
-      if (y !== undefined) animProps.y = y;
+      const targetX = x !== undefined ? x : translateX;
+      const targetY = y !== undefined ? y : translateY;
+      if (targetX !== undefined) animProps.x = targetX;
+      if (targetY !== undefined) animProps.y = targetY;
       if (scale !== undefined) animProps.scale = scale;
       if (rotateZ !== undefined) animProps.rotateZ = rotateZ;
       if (isoTiltX !== undefined) animProps.isoTiltX = isoTiltX;

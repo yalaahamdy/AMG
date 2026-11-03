@@ -3,341 +3,675 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMG Master: لغة الآلة (Machine Language Odyssey)</title>
+  <title>AMG Studio Master: لغة الآلة — Machine Language Odyssey</title>
   <link rel="stylesheet" href="../../../core/amg-tokens.css">
   <link rel="stylesheet" href="../../../core/amg-stage.css">
   <style>
-    /* التنسيقات العامة للعرض الرئيسي */
-    .master-scene {
+    /* ========================================================
+       STUDIO-GRADE VISUAL ENVIRONMENT & LIGHTING
+       ======================================================== */
+    :root {
+      --cyan-glow: #38bdf8;
+      --indigo-core: #6366f1;
+      --amber-pulse: #f59e0b;
+      --emerald-ok: #10b981;
+      --silicon-dark: #04060a;
+      --die-metal: #0d121d;
+    }
+
+    body {
+      background: #020306 !important;
+      font-family: var(--amg-font-arabic), -apple-system, sans-serif;
+    }
+
+    .amg-stage {
+      background: radial-gradient(ellipse 1400px 900px at 50% 45%, #080d1a 0%, #04060a 65%, #020305 100%) !important;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.95), 0 0 80px rgba(56, 189, 248, 0.08);
+      position: relative;
+    }
+
+    /* خلفية الشبكة الهندسية المليمترية الدقيقة (CAD Engineering Grid) */
+    .cad-grid {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+    .cad-crosshairs {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(circle 1.5px at center, rgba(56, 189, 248, 0.25) 100%, transparent 0);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    /* الحاويات المشهدية الرئيسية */
+    .cinematic-scene {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
+      transform-origin: center center;
     }
-    .master-scene.active {
+    .cinematic-scene.active {
       pointer-events: auto;
     }
 
-    /* Scene 1 Styles */
-    #sc-01 .term-box {
-      width: 860px;
-      background: #090d16;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 20px;
-      padding: 24px 32px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(56, 189, 248, 0.1);
+    /* ========================================================
+       SCENE 1: THE HIGH-END GLASS TERMINAL & DIVE
+       ======================================================== */
+    .terminal-chassis {
+      width: 960px;
+      background: rgba(10, 15, 26, 0.75);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 0;
+      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.85), 0 0 60px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
     }
-    #sc-01 .code-font {
-      font-family: var(--amg-font-mono);
-      font-size: 24px;
-      line-height: 1.8;
-      direction: ltr;
-      text-align: left;
-    }
-    #sc-01 .bin-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
-      font-family: var(--amg-font-mono);
-      font-size: 20px;
-      color: #38bdf8;
-      letter-spacing: 2px;
-      direction: ltr;
-    }
-
-    /* Scene 2 Styles */
-    #sc-02 .iso-wrapper {
+    .terminal-titlebar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 1480px;
-      height: 640px;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    #sc-02 .iso-canvas {
-      width: 880px;
-      height: 580px;
-      position: relative;
-      perspective: 1400px;
+    .terminal-dots { display: flex; gap: 8px; }
+    .t-dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 8px currentColor; }
+    .terminal-body {
+      padding: 32px 40px;
+      direction: ltr;
+      text-align: left;
+      font-family: var(--amg-font-mono);
     }
-    #sc-02 .iso-rig {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      transform: rotateX(55deg) rotateZ(-45deg);
-      transform-style: preserve-3d;
+    .syntax-line {
+      font-size: 26px;
+      line-height: 1.8;
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
-    #sc-02 .iso-card {
-      position: absolute;
-      width: 440px;
-      height: 440px;
-      left: 200px;
-      top: 60px;
-      border-radius: 24px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+    .line-no { color: #334155; font-size: 18px; width: 32px; user-select: none; }
+    .cursor-blink {
+      display: inline-block;
+      width: 12px; height: 28px;
+      background: #38bdf8;
+      vertical-align: middle;
+      box-shadow: 0 0 12px #38bdf8;
+      animation: cursorBlink 0.8s infinite;
+    }
+    @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* أسلاك الحافلة الثنائية النابضة */
+    .bus-wires-panel {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       flex-direction: column;
+      gap: 12px;
+    }
+    .wire-lane {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 15px;
+      color: #94a3b8;
+    }
+    .wire-signal {
+      flex: 1;
+      height: 6px;
+      background: #111827;
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+    }
+    .signal-pulse {
+      position: absolute;
+      top: 0; left: 0; width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+      box-shadow: 0 0 10px #38bdf8;
+      animation: signalFlow 1.2s infinite linear;
+    }
+    @keyframes signalFlow { 0% { left: -100px; } 100% { left: 100%; } }
+
+    /* ========================================================
+       SCENE 2: TRUE ARCHITECTURAL ISOMETRIC SILICON DIE
+       ======================================================== */
+    .iso-viewport {
+      width: 1540px;
+      height: 720px;
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      padding: 24px;
-      box-sizing: border-box;
+      position: relative;
+    }
+    .iso-narrative-panel {
+      width: 480px;
+      z-index: 50;
+    }
+    .iso-stage-3d {
+      width: 980px;
+      height: 680px;
+      position: relative;
+      perspective: 1600px;
+    }
+    .iso-world-rig {
+      width: 100%; height: 100%;
+      position: absolute;
+      transform: rotateX(54deg) rotateZ(-45deg);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* طبقات السيليكون المادية الحقيقية */
+    .silicon-chassis-slab {
+      position: absolute;
+      width: 520px; height: 520px;
+      left: 230px; top: 80px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #090e17 0%, #030508 100%);
+      border: 2px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 
+        0 40px 100px rgba(0, 0, 0, 0.9),
+        0 0 60px rgba(56, 189, 248, 0.15),
+        inset 0 0 40px rgba(56, 189, 248, 0.06);
+      transform-style: preserve-3d;
       transition: transform 0.1s;
     }
 
-    /* Scene 3 Climax Styles */
-    #sc-03 .hero-box {
+    /* دبابيس التوصيل الذهبية المحيطية */
+    .gold-pins-ring {
+      position: absolute;
+      inset: -14px;
+      border: 3px dashed rgba(245, 158, 11, 0.6);
+      border-radius: 40px;
+      pointer-events: none;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+    }
+
+    /* بطاقات المكونات المنطقية المنفصلة */
+    .logic-subcard {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ========================================================
+       SCENE 3: THE SILICON MONOLITH & FREQUENCY CLIMAX
+       ======================================================== */
+    .monolith-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      position: relative;
     }
-    #sc-03 .chip-icon-box {
-      width: 130px;
-      height: 130px;
-      border-radius: 28px;
-      background: rgba(56, 189, 248, 0.08);
+    .processor-die-monolith {
+      width: 180px; height: 180px;
+      border-radius: 36px;
+      background: radial-gradient(circle at 35% 35%, #1e293b 0%, #090e17 80%);
       border: 2px solid #38bdf8;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 60px rgba(56, 189, 248, 0.35);
-      margin-bottom: 28px;
+      box-shadow: 
+        0 0 80px rgba(56, 189, 248, 0.5),
+        0 0 160px rgba(99, 102, 241, 0.3),
+        inset 0 0 30px rgba(56, 189, 248, 0.4);
+      margin-bottom: 36px;
+      position: relative;
     }
-    #sc-03 .freq-stat {
-      font-family: var(--amg-font-mono);
-      font-size: 48px;
-      font-weight: 800;
-      color: #f59e0b;
-      margin-top: 16px;
+    .radar-pulse-ring {
+      position: absolute;
+      inset: -40px;
+      border: 2px solid rgba(56, 189, 248, 0.4);
+      border-radius: 50%;
+      animation: radarPulse 2s infinite ease-out;
+      pointer-events: none;
     }
+    @keyframes radarPulse {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* التايبوجرافي التحريري الاستعراضي */
+    .luxury-headline {
+      font-size: 84px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 0 0 20px 0;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .luxury-subhead {
+      font-size: 26px;
+      color: #94a3b8;
+      max-width: 980px;
+      line-height: 1.6;
+      margin: 0 0 32px 0;
+    }
+
+    /* عداد التردد والتيليميتري */
+    .telemetry-bar {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 12px 36px;
+      border-radius: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    }
+    .telemetry-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .telemetry-lbl { font-size: 13px; color: #64748b; font-family: var(--amg-font-mono); }
+    .telemetry-val { font-size: 28px; font-weight: 800; color: #f59e0b; font-family: var(--amg-font-mono); }
   </style>
 </head>
 <body class="amg-body">
   <div id="amg-stage" class="amg-stage amg-crisp-stroke" data-aspect="16:9">
-    <div class="amg-grid-overlay"></div>
+    <div class="cad-grid"></div>
+    <div class="cad-crosshairs"></div>
+
     <div id="amg-camera-rig" class="amg-camera-rig">
       
       <!-- ========================================================
-           Scene 01: وهم لغات البرمجة وتفكك التجريد (0s - 3.8s)
+           SCENE 1: THE CODE ABSTRACTION DIVE (0.0s - 4.2s)
            ======================================================== -->
-      <section id="sc-01" class="master-scene active">
+      <section id="cinema-s01" class="cinematic-scene active">
         <div style="display:flex; flex-direction:column; align-items:center;">
-          <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 18px; border-radius:20px; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); color:#38bdf8; font-size:15px; font-weight:600; margin-bottom:20px;" id="m-s01-badge">
-            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#38bdf8;" data-amg-ambient="pulse"></span>
-            طبقات التجريد البرمجي • Abstraction Layers
+          
+          <div style="display:inline-flex; align-items:center; gap:10px; padding:8px 24px; border-radius:30px; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); color:#38bdf8; font-size:16px; font-weight:700; margin-bottom:24px; box-shadow:0 0 25px rgba(56,189,248,0.2);" id="c-s01-badge">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#38bdf8; box-shadow:0 0 10px #38bdf8;" data-amg-ambient="pulse"></span>
+            طبقات التجريد البرمجي • CODE ABSTRACTION DIVE
           </div>
-          <h1 style="font-family:var(--amg-font-arabic); font-size:74px; font-weight:800; color:#fff; margin:0 0 16px 0; text-align:center;" id="m-s01-title">
+
+          <h1 style="font-family:var(--amg-font-arabic); font-size:78px; font-weight:900; color:#fff; margin:0 0 14px 0; text-align:center; letter-spacing:-0.02em;" id="c-s01-title">
             الحاسوب لا يفهم لغتك!
           </h1>
-          <p style="font-family:var(--amg-font-arabic); font-size:24px; color:#94a3b8; margin:0 0 36px 0; text-align:center;" id="m-s01-sub">
+          
+          <p style="font-family:var(--amg-font-arabic); font-size:24px; color:#94a3b8; margin:0 0 40px 0; text-align:center; max-width:840px;" id="c-s01-sub">
             كل سطر كود تكتبه بالإنجليزية يتحول عبر طبقات معقدة إلى سيل بدائي من الشحنات الكهربائية.
           </p>
 
-          <div class="term-box" id="m-s01-box" data-amg-ambient="float">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
-              <span style="width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-              <span style="width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-              <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-              <span style="margin-left:12px; font-family:var(--amg-font-mono); font-size:13px; color:#64748b;">code.py → assembly.asm → binary.bin</span>
+          <!-- Glass Terminal -->
+          <div class="terminal-chassis" id="c-s01-terminal" data-amg-ambient="float">
+            <div class="terminal-titlebar">
+              <div class="terminal-dots">
+                <span class="t-dot" style="background:#ef4444; color:#ef4444;"></span>
+                <span class="t-dot" style="background:#f59e0b; color:#f59e0b;"></span>
+                <span class="t-dot" style="background:#10b981; color:#10b981;"></span>
+              </div>
+              <span style="font-family:var(--amg-font-mono); font-size:14px; color:#64748b;">kernel_pipeline.py ➔ compiler ➔ machine_code</span>
+              <span style="font-family:var(--amg-font-mono); font-size:12px; color:#38bdf8; padding:3px 10px; border-radius:10px; background:rgba(56,189,248,0.1);">64-BIT X86_64</span>
             </div>
-            <div class="code-font" id="m-s01-py">
-              <span style="color:#f43f5e;">print</span><span style="color:#ffffff;">(</span><span style="color:#10b981;">"مرحباً بالعالم"</span><span style="color:#ffffff;">)</span>
-            </div>
-            <div class="code-font" id="m-s01-asm" style="color:#94a3b8; font-size:18px; opacity:0; margin-top:8px;">
-              <span style="color:#6366f1;">MOV</span> R1, 0x48 &nbsp;|&nbsp; <span style="color:#6366f1;">MOV</span> R2, 0x69 &nbsp;|&nbsp; <span style="color:#6366f1;">SYS_WRITE</span>
-            </div>
-            <div class="bin-row" id="m-s01-bin" style="opacity:0;">
-              <span>01001000</span>
-              <span>01100101</span>
-              <span>01101100</span>
-              <span>01101100</span>
-              <span>01101111</span>
+
+            <div class="terminal-body">
+              <div class="syntax-line" id="line-py">
+                <span class="line-no">01</span>
+                <span style="color:#f43f5e; font-weight:bold;">def</span>
+                <span style="color:#38bdf8; font-weight:bold;">execute_thought</span><span style="color:#fff;">():</span>
+              </div>
+              <div class="syntax-line" style="padding-left: 28px;" id="line-print">
+                <span class="line-no">02</span>
+                <span style="color:#6366f1;">print</span><span style="color:#fff;">(</span><span style="color:#10b981;">"مرحباً بالعالم"</span><span style="color:#fff;">)</span>
+                <span class="cursor-blink"></span>
+              </div>
+              <div class="syntax-line" style="padding-left: 28px; color:#94a3b8; font-size:20px; opacity:0; margin-top:8px;" id="line-asm">
+                <span class="line-no">03</span>
+                <span style="color:#f59e0b;">MOV</span> <span style="color:#fff;">RAX, 0x48</span> &nbsp;|&nbsp;
+                <span style="color:#f59e0b;">XOR</span> <span style="color:#fff;">RDI, RDI</span> &nbsp;|&nbsp;
+                <span style="color:#e11d48;">SYSCALL</span>
+              </div>
+
+              <!-- 8-Lane Binary Data Bus -->
+              <div class="bus-wires-panel" id="c-s01-bus" style="opacity:0;">
+                <div class="wire-lane">
+                  <span style="width:110px; font-family:var(--amg-font-mono); color:#38bdf8;">BUS_DATA[0..7]:</span>
+                  <div class="wire-signal"><div class="signal-pulse"></div></div>
+                  <span style="font-family:var(--amg-font-mono); font-size:18px; color:#fff; letter-spacing:4px; font-weight:bold;" id="c-s01-binary-bits">
+                    01001000 01100101 01101100 01101111
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </section>
 
       <!-- ========================================================
-           Scene 02: تشريح السيليكون والبوابات المنطقية (3.8s - 10.5s)
+           SCENE 2: TRUE ISOMETRIC SILICON PROCESSOR (4.2s - 10.5s)
            ======================================================== -->
-      <section id="sc-02" class="master-scene">
-        <div class="iso-wrapper">
-          <div style="width:480px;" id="m-s02-text">
-            <span style="display:inline-block; padding:4px 14px; border-radius:12px; background:rgba(245,158,11,0.15); color:#f59e0b; font-size:14px; font-weight:700; margin-bottom:16px;">
-              التشريح الإيزومتري للمعالج
+      <section id="cinema-s02" class="cinematic-scene">
+        <div class="iso-viewport">
+          
+          <!-- Narrative Column -->
+          <div class="iso-narrative-panel" id="c-s02-narrative">
+            <span style="display:inline-block; padding:6px 16px; border-radius:20px; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:#f59e0b; font-size:14px; font-weight:700; margin-bottom:20px;">
+              ⚡ التشريح المادي للسيليكون
             </span>
-            <h2 style="font-family:var(--amg-font-arabic); font-size:58px; color:#ffffff; line-height:1.2; margin:0 0 20px 0;">
-              لغة الآلة: نبضات الجهد والسيليكون
+            <h2 style="font-family:var(--amg-font-arabic); font-size:62px; font-weight:900; color:#ffffff; line-height:1.15; margin:0 0 20px 0;">
+              لغة الآلة: نبضات الجهد الحقيقي
             </h2>
-            <p style="font-family:var(--amg-font-arabic); font-size:20px; color:#94a3b8; line-height:1.6; margin:0 0 24px 0;">
-              لا توجد حروف ولا كلمات داخل الشريحة؛ كل ما تراه هو جهد كهربي عالي (+5V يمثل 1) أو منخفض (0V يمثل 0) يفتح ويغلق مليارات الترانزستورات في أجزاء من المليار من الثانية.
+            <p style="font-family:var(--amg-font-arabic); font-size:21px; color:#94a3b8; line-height:1.65; margin:0 0 28px 0;">
+              لا توجد لغة ولا حروف داخل المعالج؛ كل ما تراه هو جهد كهربي مرتفع (+5V يمثل 1) أو منخفض (0V يمثل 0) يفتح ويغلق مليارات الترانزستورات في جزء من المليار من الثانية.
             </p>
-            <div style="font-family:var(--amg-font-mono); font-size:16px; color:#38bdf8;">
-              ALU: ADD R1, R2 → [01001000] EXECUTED
+
+            <!-- Real-time Voltage Oscilloscope Card (D3 Waveform) -->
+            <div style="background:rgba(15,23,42,0.9); border:1px solid rgba(56,189,248,0.3); border-radius:18px; padding:18px 24px; box-shadow:0 15px 40px rgba(0,0,0,0.8);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-family:var(--amg-font-mono); font-size:13px; color:#38bdf8;">DIGITAL VOLTAGE OSCILLOSCOPE</span>
+                <span style="font-family:var(--amg-font-mono); font-size:16px; color:#10b981; font-weight:bold;" id="voltage-stat">+5.0 V [HIGH]</span>
+              </div>
+              <svg width="100%" height="80" viewBox="0 0 400 80" fill="none">
+                <!-- Reference voltage grid lines -->
+                <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(16, 185, 129, 0.25)" stroke-dasharray="4 4" stroke-width="1"/>
+                <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(100, 116, 139, 0.25)" stroke-dasharray="4 4" stroke-width="1"/>
+                <!-- Square Digital Waveform Path -->
+                <path id="digital-wave-path" d="M 0 60 H 40 V 20 H 90 V 60 H 140 V 20 H 190 V 60 H 240 V 20 H 300 V 60 H 350 V 20 H 400" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px #38bdf8);" pathLength="100"/>
+              </svg>
+              <div style="display:flex; justify-content:space-between; font-family:var(--amg-font-mono); font-size:11px; color:#64748b; margin-top:6px;">
+                <span>0.0V (BIT 0)</span>
+                <span>CLOCK TRANSITION EDGE</span>
+                <span>+5.0V (BIT 1)</span>
+              </div>
             </div>
           </div>
 
-          <div class="iso-canvas" id="m-s02-canvas" data-amg-ambient="float">
-            <div class="iso-rig">
-              <!-- Layer 1: Silicon Substrate -->
-              <div class="iso-card" id="m-layer-1" style="background:#090e17; border:2px solid #1e293b; transform:translateZ(0px);">
-                <span style="font-family:var(--amg-font-arabic); font-size:17px; font-weight:700; color:#64748b;">1. طبقة السيليكون والترانزستورات</span>
-                <svg width="100%" height="280" viewBox="0 0 380 280">
-                  <path id="m-silicon-path" d="M 20 20 H 360 M 20 60 H 360 M 20 100 H 360 M 20 140 H 360 M 20 180 H 360 M 20 220 H 360" stroke="#1e293b" stroke-width="2" pathLength="100"/>
-                  <path d="M 60 20 V 260 M 120 20 V 260 M 180 20 V 260 M 240 20 V 260 M 300 20 V 260" stroke="#1e293b" stroke-width="2" pathLength="100"/>
+          <!-- True 3D Isometric Silicon Rig -->
+          <div class="iso-stage-3d">
+            <div class="iso-world-rig" id="c-s02-world-rig">
+              
+              <!-- Silicon Processor Base Die -->
+              <div class="silicon-chassis-slab" id="c-s02-slab">
+                <div class="gold-pins-ring"></div>
+                
+                <!-- Circuit Trace Bus SVG -->
+                <svg width="100%" height="100%" viewBox="0 0 520 520" style="position:absolute; inset:0;">
+                  <!-- Corner alignment markers -->
+                  <rect x="20" y="20" width="40" height="40" fill="none" stroke="rgba(56,189,248,0.5)" stroke-width="2"/>
+                  <rect x="460" y="20" width="40" height="40" fill="none" stroke="rgba(56,189,248,0.5)" stroke-width="2"/>
+                  <rect x="20" y="460" width="40" height="40" fill="none" stroke="rgba(56,189,248,0.5)" stroke-width="2"/>
+                  <rect x="460" y="460" width="40" height="40" fill="none" stroke="rgba(56,189,248,0.5)" stroke-width="2"/>
+                  
+                  <!-- Circuit Tracks (Faint Guides) -->
+                  <path d="M 60 260 H 200 L 260 200 V 80" stroke="rgba(56,189,248,0.12)" stroke-width="4" fill="none"/>
+                  <path d="M 460 260 H 320 L 260 320 V 440" stroke="rgba(245,158,11,0.12)" stroke-width="4" fill="none"/>
+                  <path d="M 120 120 L 220 220 H 300 L 400 120" stroke="rgba(16,185,129,0.12)" stroke-width="3" fill="none"/>
+
+                  <!-- Main Bus Interconnects (Glowing Animated Traces) -->
+                  <path id="trace-bus-1" d="M 60 260 H 200 L 260 200 V 80" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" fill="none" style="filter: drop-shadow(0 0 6px #38bdf8);" pathLength="100"/>
+                  <path id="trace-bus-2" d="M 460 260 H 320 L 260 320 V 440" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" fill="none" style="filter: drop-shadow(0 0 6px #f59e0b);" pathLength="100"/>
+                  <path id="trace-bus-3" d="M 120 120 L 220 220 H 300 L 400 120" stroke="#10b981" stroke-width="2" stroke-linecap="round" fill="none" style="filter: drop-shadow(0 0 5px #10b981);" pathLength="100"/>
+
+                  <!-- Active Glowing Data Pulses -->
+                  <circle id="pulse-dot-1" cx="60" cy="260" r="6" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)"/>
+                  <circle id="pulse-dot-2" cx="460" cy="260" r="6" fill="#f59e0b" filter="drop-shadow(0 0 8px #f59e0b)"/>
                 </svg>
-              </div>
 
-              <!-- Layer 2: ALU & Registers -->
-              <div class="iso-card" id="m-layer-2" style="background:rgba(15,23,42,0.88); border:2px solid #38bdf8; transform:translateZ(0px);">
-                <span style="font-family:var(--amg-font-arabic); font-size:17px; font-weight:700; color:#38bdf8;">2. وحدة الحساب والمنطق والسجلات (ALU)</span>
-                <div style="display:flex; justify-content:space-around; align-items:center; height:240px;">
-                  <div style="padding:16px; background:#0f172a; border:1px solid #38bdf8; border-radius:12px; text-align:center;">
-                    <span style="font-size:13px; color:#94a3b8;">REG A</span><br>
-                    <b style="font-size:20px; color:#fff; font-family:var(--amg-font-mono);">01001000</b>
+                <!-- Die Core: ALU & Logic Gates Array -->
+                <div style="position:absolute; inset:60px; display:flex; flex-direction:column; justify-content:space-between; z-index:10;">
+                  
+                  <!-- Top Layer: 8-Bit Register Array -->
+                  <div class="logic-subcard" id="c-s02-reg-card" style="transform:translateZ(80px); transition:transform 0.8s ease;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                      <span style="font-family:var(--amg-font-mono); font-size:13px; color:#38bdf8; font-weight:bold;">REGISTER FILE [RAX]</span>
+                      <span style="font-family:var(--amg-font-mono); font-size:12px; color:#10b981;">LATCHED</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; gap:6px;">
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#fff; font-weight:bold; font-size:16px;">0</div>
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#38bdf8; font-weight:bold; font-size:16px; box-shadow:0 0 10px rgba(56,189,248,0.4);">1</div>
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#fff; font-weight:bold; font-size:16px;">0</div>
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#fff; font-weight:bold; font-size:16px;">0</div>
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#38bdf8; font-weight:bold; font-size:16px; box-shadow:0 0 10px rgba(56,189,248,0.4);">1</div>
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#fff; font-weight:bold; font-size:16px;">0</div>
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#fff; font-weight:bold; font-size:16px;">0</div>
+                      <div style="flex:1; padding:8px 0; background:#090e17; border:1px solid #38bdf8; border-radius:6px; text-align:center; font-family:var(--amg-font-mono); color:#fff; font-weight:bold; font-size:16px;">0</div>
+                    </div>
                   </div>
-                  <div style="font-size:26px; color:#38bdf8;">+</div>
-                  <div style="padding:16px; background:#0f172a; border:1px solid #38bdf8; border-radius:12px; text-align:center;">
-                    <span style="font-size:13px; color:#94a3b8;">REG B</span><br>
-                    <b style="font-size:20px; color:#fff; font-family:var(--amg-font-mono);">00000001</b>
-                  </div>
-                </div>
-              </div>
 
-              <!-- Layer 3: Logic Gates -->
-              <div class="iso-card" id="m-layer-3" style="background:rgba(30,41,59,0.82); border:2px solid #f59e0b; transform:translateZ(0px);">
-                <span style="font-family:var(--amg-font-arabic); font-size:17px; font-weight:700; color:#f59e0b;">3. مصفوفة البوابات المنطقية (Logic Gates)</span>
-                <div style="display:flex; justify-content:space-between; align-items:center; height:240px; padding:0 20px;">
-                  <span id="m-gate-and" style="padding:10px 22px; border:2px solid #f59e0b; border-radius:8px; font-weight:bold; color:#fff;">AND</span>
-                  <span id="m-gate-or" style="padding:10px 22px; border:2px solid #f59e0b; border-radius:8px; font-weight:bold; color:#fff;">OR</span>
-                  <span id="m-gate-not" style="padding:10px 22px; border:2px solid #f59e0b; border-radius:8px; font-weight:bold; color:#fff;">NOT</span>
+                  <!-- Middle Layer: Real IEEE Logic Gates -->
+                  <div class="logic-subcard" id="c-s02-alu-card" style="transform:translateZ(150px); border-color:#f59e0b; transition:transform 0.8s ease;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                      <span style="font-family:var(--amg-font-mono); font-size:13px; color:#f59e0b; font-weight:bold;">ALU EXECUTION CORE: 64-BIT ADD</span>
+                      <span style="font-size:12px; color:#94a3b8; font-family:var(--amg-font-mono);">CYCLE: #04829</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-around; align-items:center;">
+                      <!-- IEEE AND Gate SVG -->
+                      <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                        <svg width="60" height="40" viewBox="0 0 60 40">
+                          <path d="M 10 10 H 30 A 15 15 0 0 1 30 30 H 10 Z" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="2"/>
+                          <line x1="0" y1="15" x2="10" y2="15" stroke="#f59e0b" stroke-width="2"/>
+                          <line x1="0" y1="25" x2="10" y2="25" stroke="#f59e0b" stroke-width="2"/>
+                          <line x1="45" y1="20" x2="60" y2="20" stroke="#f59e0b" stroke-width="2"/>
+                        </svg>
+                        <span style="font-size:11px; font-family:var(--amg-font-mono); color:#f59e0b;">AND GATE</span>
+                      </div>
+                      
+                      <!-- IEEE XOR Gate SVG -->
+                      <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                        <svg width="60" height="40" viewBox="0 0 60 40">
+                          <path d="M 5 5 Q 15 20 5 35 M 12 5 Q 22 20 12 35 Q 32 35 48 20 Q 32 5 12 5 Z" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
+                          <line x1="0" y1="12" x2="10" y2="12" stroke="#38bdf8" stroke-width="2"/>
+                          <line x1="0" y1="28" x2="10" y2="28" stroke="#38bdf8" stroke-width="2"/>
+                          <line x1="48" y1="20" x2="60" y2="20" stroke="#38bdf8" stroke-width="2"/>
+                        </svg>
+                        <span style="font-size:11px; font-family:var(--amg-font-mono); color:#38bdf8;">XOR GATE</span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
             </div>
           </div>
+
         </div>
       </section>
 
       <!-- ========================================================
-           Scene 03: سمفونية التنفيذ والخاتمة (10.5s - 15.0s)
+           SCENE 3: THE SILICON MONOLITH CLIMAX (10.5s - 15.0s)
            ======================================================== -->
-      <section id="sc-03" class="master-scene">
-        <div class="hero-box">
-          <div class="chip-icon-box" id="m-s03-chip">
-            <svg style="width:72px; height:72px; color:#38bdf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <section id="cinema-s03" class="cinematic-scene">
+        <div class="monolith-wrapper">
+          
+          <!-- Central Silicon Monolith Processor -->
+          <div class="processor-die-monolith" id="c-s03-monolith">
+            <div class="radar-pulse-ring"></div>
+            <div class="radar-pulse-ring" style="animation-delay: 0.9s;"></div>
+            
+            <svg style="width:96px; height:96px; color:#38bdf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <rect x="4" y="4" width="16" height="16" rx="2" pathLength="100"/>
               <rect x="9" y="9" width="6" height="6" pathLength="100"/>
               <path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2" pathLength="100"/>
             </svg>
           </div>
-          <h1 style="font-family:var(--amg-font-arabic); font-size:76px; font-weight:900; color:#fff; margin:0 0 16px 0;" id="m-s03-title">
+
+          <div style="display:inline-flex; align-items:center; gap:10px; padding:6px 20px; border-radius:24px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:#f59e0b; font-size:15px; font-weight:700; margin-bottom:20px;" id="c-s03-badge">
+            ⚡ حقيقة الحوسبة الخالصة • PURE BINARY EXECUTION
+          </div>
+
+          <h1 class="luxury-headline" id="c-s03-title">
             لغة الآلة: الصوت الوحيد للسيليكون
           </h1>
-          <p style="font-family:var(--amg-font-arabic); font-size:26px; color:#94a3b8; max-width:860px; margin:0 0 24px 0;" id="m-s03-sub">
-            كل برمجيات العالم تنحني في النهاية أمام حقيقة الصفر والواحد.
+
+          <p class="luxury-subhead" id="c-s03-sub">
+            خلف كل برمجيات العالم، لا توجد لغات ولا نصوص؛ بل سيمفونية مليارات الترانزستورات التي تنصاع فقط لمنطق الصفر والواحد.
           </p>
-          <div class="freq-stat" id="m-s03-freq">0.00 GHz</div>
+
+          <!-- Telemetry Live Bar -->
+          <div class="telemetry-bar" id="c-s03-telemetry">
+            <div class="telemetry-item">
+              <span class="telemetry-lbl">CPU CLOCK FREQUENCY</span>
+              <span class="telemetry-val" id="telemetry-freq">0.00 GHz</span>
+            </div>
+            <div style="width:1px; height:36px; background:rgba(255,255,255,0.15);"></div>
+            <div class="telemetry-item">
+              <span class="telemetry-lbl">INSTRUCTIONS / SEC</span>
+              <span class="telemetry-val" style="color:#10b981;" id="telemetry-ips">0 MIPS</span>
+            </div>
+            <div style="width:1px; height:36px; background:rgba(255,255,255,0.15);"></div>
+            <div class="telemetry-item">
+              <span class="telemetry-lbl">EXECUTION STATE</span>
+              <span class="telemetry-val" style="color:#38bdf8; font-size:20px;">LOCKED 100%</span>
+            </div>
+          </div>
+
         </div>
       </section>
 
     </div>
   </div>
 
-  <!-- مكتبات UMD غير المتأثرة بقيود CORS عند فتح الملف مباشرة عبر file:/// -->
+  <!-- UMD Libraries (Zero-CORS / Native file:/// Compatible) -->
   <script src="../../../core/vendor/anime.umd.min.js"></script>
   <script src="../../../core/vendor/d3.min.js"></script>
   <script src="../../../core/amg-runtime-iife.js"></script>
 
   <script>
-    // تهيئة النواة الشاملة للمشروع (15000ms @ 60fps) متوافقة 100% مع file:///
+    // ========================================================
+    // MASTER CHOREOGRAPHY & TIMELINE ENGINE
+    // ========================================================
     const { clock, camera, hud, timeline } = AMG.initAMGStage({ durationMs: 15000, fps: 60 });
     AMG.registerAmbientAliveLoop(clock, '#amg-stage');
 
-    /* ========================================================
-       المشهد 1 (0ms - 3800ms): SC-005 Macro Dive
-       ======================================================== */
-    timeline.add('#sc-01', { opacity: [0, 1], duration: 100 }, 0);
+    /* --------------------------------------------------------
+       SCENE 1 (0ms - 4200ms): The Code Dive
+       -------------------------------------------------------- */
+    timeline.add('#cinema-s01', { opacity: [0, 1], duration: 150 }, 0);
     camera.keyframe(timeline, { scale: 1.0, rotateZ: 0, duration: 600, ease: 'outExpo', start: 0 });
-    camera.keyframe(timeline, { scale: 1.35, rotateZ: -1.6, duration: 2400, ease: 'inOutCubic', start: 1400 });
 
-    timeline.add('#m-s01-badge', { opacity: [0, 1], translateY: [-16, 0], duration: 400, ease: 'outExpo' }, 100);
+    // Entrance of Badge, Title, Subtitle
+    timeline.add('#c-s01-badge', { opacity: [0, 1], translateY: [-18, 0], duration: 400, ease: 'outExpo' }, 100);
 
-    const titleUnits = AMG.prepareKineticText('#m-s01-title', { mode: 'words' });
-    AMG.animateKineticReveal(timeline, titleUnits, { start: 180, duration: 750, staggerMs: 70, ease: 'outExpo' });
+    const titleUnits = AMG.prepareKineticText('#c-s01-title', { mode: 'words' });
+    AMG.animateKineticReveal(timeline, titleUnits, { start: 200, duration: 800, staggerMs: 70, ease: 'outExpo' });
 
-    timeline.add('#m-s01-sub', { opacity: [0, 1], translateY: [12, 0], duration: 550, ease: 'outQuad' }, 400);
-    timeline.add('#m-s01-box', { opacity: [0, 1], scale: [0.92, 1.0], duration: 600, ease: 'outBack' }, 300);
+    timeline.add('#c-s01-sub', { opacity: [0, 1], translateY: [12, 0], duration: 600, ease: 'outQuad' }, 450);
 
-    timeline.add('#m-s01-asm', { opacity: [0, 1], translateY: [8, 0], duration: 500, ease: 'outExpo' }, 1600);
-    timeline.add('#m-s01-bin', { opacity: [0, 1], scale: [0.95, 1.0], duration: 600, ease: 'outExpo' }, 2200);
+    // Terminal Entrance
+    timeline.add('#c-s01-terminal', { opacity: [0, 1], scale: [0.94, 1.0], duration: 700, ease: 'outBack' }, 350);
 
-    // انتقال المشهد 1 إلى 2 عند 3600ms
-    timeline.add('#sc-01', { opacity: [1, 0], scale: [1, 1.1], duration: 300, ease: 'inExpo' }, 3600);
+    // Assembly translation line reveal
+    timeline.add('#line-asm', { opacity: [0, 1], translateY: [8, 0], duration: 500, ease: 'outExpo' }, 1500);
 
-    /* ========================================================
-       المشهد 2 (3800ms - 10500ms): SC-062 Isometric Explode
-       ======================================================== */
-    timeline.add('#sc-02', { opacity: [0, 1], duration: 250 }, 3800);
-    camera.keyframe(timeline, { scale: 1.0, isoTiltX: 0, isoRotateZ: 0, duration: 800, ease: 'outExpo', start: 3800 });
+    // Binary Bus Wires reveal & Camera Dive In
+    timeline.add('#c-s01-bus', { opacity: [0, 1], duration: 400, ease: 'linear' }, 2100);
 
-    timeline.add('#m-s02-text', { opacity: [0, 1], translateX: [35, 0], duration: 700, ease: 'outExpo' }, 3900);
-    timeline.add('#m-s02-canvas', { opacity: [0, 1], duration: 600, ease: 'linear' }, 3850);
+    // The Macro Dive (Camera zooms deep into the binary data stream)
+    camera.keyframe(timeline, { scale: 3.2, translateY: 140, duration: 2000, ease: 'inCubic', start: 2200 });
 
-    // تفكيك الطبقات الإيزومترية عمودياً
-    timeline.add('#m-layer-2', {
-      transform: ['translateZ(0px)', 'translateZ(90px)'],
-      duration: 1200,
-      ease: 'outExpo'
-    }, 4300);
+    // Seamless Transition 1 -> 2 at 4100ms
+    timeline.add('#cinema-s01', { opacity: [1, 0], scale: [1, 1.4], duration: 300, ease: 'inExpo' }, 3900);
 
-    timeline.add('#m-layer-3', {
-      transform: ['translateZ(0px)', 'translateZ(180px)'],
+    /* --------------------------------------------------------
+       SCENE 2 (4200ms - 10500ms): Isometric Silicon Architecture
+       -------------------------------------------------------- */
+    timeline.add('#cinema-s02', { opacity: [0, 1], duration: 300 }, 4200);
+    camera.keyframe(timeline, { scale: 1.0, translateY: 0, isoTiltX: 0, isoRotateZ: 0, duration: 900, ease: 'outExpo', start: 4200 });
+
+    // Narrative Panel Entrance
+    timeline.add('#c-s02-narrative', { opacity: [0, 1], translateX: [40, 0], duration: 800, ease: 'outExpo' }, 4300);
+
+    // Drawing Circuit Traces
+    AMG.drawSVG(timeline, '#trace-bus-1', { start: 4500, duration: 1100, ease: 'inOutQuad' });
+    AMG.drawSVG(timeline, '#trace-bus-2', { start: 4800, duration: 1100, ease: 'inOutQuad' });
+    AMG.drawSVG(timeline, '#trace-bus-3', { start: 5000, duration: 1100, ease: 'inOutQuad' });
+
+    // Digital Oscilloscope Waveform Animation
+    AMG.drawSVG(timeline, '#digital-wave-path', { start: 4700, duration: 1800, ease: 'linear' });
+
+    // Live Voltage Text Toggle
+    const voltEl = document.querySelector('#voltage-stat');
+    timeline.add({ val: 0 }, {
+      val: 1, duration: 2400, ease: 'linear',
+      onUpdate: (anim) => {
+        const isHigh = Math.floor(anim.progress * 8) % 2 === 0;
+        voltEl.textContent = isHigh ? '+5.0 V [HIGH]' : '0.0 V [LOW]';
+        voltEl.style.color = isHigh ? '#10b981' : '#64748b';
+      }
+    }, 4700);
+
+    // Vertical Exploded Stack Animation
+    timeline.add('#c-s02-reg-card', {
+      transform: ['translateZ(0px)', 'translateZ(100px)'],
       duration: 1400,
       ease: 'outExpo'
-    }, 4500);
+    }, 4600);
 
-    AMG.drawSVG(timeline, '#m-silicon-path', { start: 4600, duration: 1200, ease: 'inOutQuad' });
-
-    // وميض البوابات المنطقية AND / OR / NOT
-    timeline.add('#m-gate-and', { background: ['transparent', 'rgba(245,158,11,0.3)', 'transparent'], duration: 600 }, 5800);
-    timeline.add('#m-gate-or', { background: ['transparent', 'rgba(56,189,248,0.3)', 'transparent'], duration: 600 }, 6400);
-    timeline.add('#m-gate-not', { background: ['transparent', 'rgba(16,185,129,0.3)', 'transparent'], duration: 600 }, 7000);
-
-    // انتقال المشهد 2 إلى 3 عند 10200ms
-    timeline.add('#sc-02', { opacity: [1, 0], scale: [1, 0.94], duration: 350, ease: 'inExpo' }, 10200);
-
-    /* ========================================================
-       المشهد 3 (10500ms - 15000ms): SC-136 Climax Lockup
-       ======================================================== */
-    timeline.add('#sc-03', { opacity: [0, 1], duration: 250 }, 10500);
-    camera.keyframe(timeline, { scale: 1.0, rotateZ: 0, duration: 800, ease: 'outBack', start: 10500 });
-    camera.impulse(timeline, 0.45, 10700, 500);
-
-    timeline.add('#m-s03-chip', { opacity: [0, 1], scale: [0.7, 1.0], duration: 650, ease: 'outBack' }, 10550);
-
-    const outroUnits = AMG.prepareKineticText('#m-s03-title', { mode: 'words' });
-    AMG.animateKineticReveal(timeline, outroUnits, { start: 10750, duration: 750, staggerMs: 65, ease: 'outExpo' });
-
-    timeline.add('#m-s03-sub', { opacity: [0, 1], translateY: [15, 0], duration: 600, ease: 'outQuad' }, 11100);
-
-    // عداد تردد المعالج المباشر
-    const freqEl = document.querySelector('#m-s03-freq');
-    const proxyFreq = { val: 0 };
-    timeline.add(proxyFreq, {
-      val: 4.20,
+    timeline.add('#c-s02-alu-card', {
+      transform: ['translateZ(0px)', 'translateZ(200px)'],
       duration: 1600,
+      ease: 'outExpo'
+    }, 4900);
+
+    // Camera slow drift while inspecting architecture
+    camera.keyframe(timeline, { scale: 1.06, rotateZ: -1.2, duration: 4500, ease: 'inOutQuad', start: 5500 });
+
+    // Transition 2 -> 3 at 10200ms
+    timeline.add('#cinema-s02', { opacity: [1, 0], scale: [1, 0.92], duration: 350, ease: 'inExpo' }, 10150);
+
+    /* --------------------------------------------------------
+       SCENE 3 (10500ms - 15000ms): The Silicon Monolith Climax
+       -------------------------------------------------------- */
+    timeline.add('#cinema-s03', { opacity: [0, 1], duration: 300 }, 10500);
+    camera.keyframe(timeline, { scale: 1.0, rotateZ: 0, duration: 800, ease: 'outBack', start: 10500 });
+    camera.impulse(timeline, 0.5, 10700, 550);
+
+    // Processor Monolith Die Entrance
+    timeline.add('#c-s03-monolith', {
+      opacity: [0, 1],
+      scale: [0.65, 1.0],
+      duration: 750,
+      ease: 'outBack'
+    }, 10550);
+
+    timeline.add('#c-s03-badge', { opacity: [0, 1], translateY: [-15, 0], duration: 400, ease: 'outExpo' }, 10700);
+
+    const outroUnits = AMG.prepareKineticText('#c-s03-title', { mode: 'words' });
+    AMG.animateKineticReveal(timeline, outroUnits, { start: 10800, duration: 800, staggerMs: 60, ease: 'outExpo' });
+
+    timeline.add('#c-s03-sub', { opacity: [0, 1], translateY: [15, 0], duration: 600, ease: 'outQuad' }, 11200);
+    timeline.add('#c-s03-telemetry', { opacity: [0, 1], scale: [0.9, 1.0], duration: 700, ease: 'outBack' }, 11300);
+
+    // Telemetry Frequency Counter (0.00 -> 5.20 GHz) & MIPS
+    const freqEl = document.querySelector('#telemetry-freq');
+    const ipsEl = document.querySelector('#telemetry-ips');
+    const proxyTelemetry = { ghz: 0, mips: 0 };
+
+    timeline.add(proxyTelemetry, {
+      ghz: 5.20,
+      mips: 148200,
+      duration: 1800,
       ease: 'outExpo',
       onUpdate: () => {
-        freqEl.textContent = `${proxyFreq.val.toFixed(2)} GHz`;
+        freqEl.textContent = `${proxyTelemetry.ghz.toFixed(2)} GHz`;
+        ipsEl.textContent = `${Math.round(proxyTelemetry.mips).toLocaleString()} MIPS`;
       }
-    }, 10800);
+    }, 10900);
 
-    console.log('AMG Machine Language Master Production (Zero-CORS Native) Initialized Successfully.');
+    console.log('AMG Studio Masterpiece: Machine Language Odyssey Loaded Successfully.');
   </script>
 </body>
 </html>
